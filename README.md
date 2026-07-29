@@ -421,6 +421,6 @@ AGPL V3
 
 # Author 
 
-Developed by **<Swastik Saha>**
+Developed by **Swastik Saha**
 
 Cybersecurity • Artificial Intelligence • Threat Intelligence • Machine Learning
