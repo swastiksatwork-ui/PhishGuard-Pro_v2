@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body{
+background:#05070d;
+color:white;
+font-family:Segoe UI;
+padding:40px;
+}
+
+.report{
+
+background:#111827;
+
+padding:30px;
+
+border-radius:15px;
+
+margin-bottom:20px;
+}
+
+.report-scroll{
+
+margin-top:15px;
+
+max-height:600px;
+
+overflow-y:auto;
+
+white-space:pre-wrap;
+
+line-height:1.7;
+
+color:#ffffff;
+
+text-shadow:0 0 4px #FFA53D, 0 0 12px rgba(255,165,61,.45);
+
+padding-right:10px;
+}
+
+.report-scroll::-webkit-scrollbar{
+width:8px;
+}
+
+.report-scroll::-webkit-scrollbar-thumb{
+background:rgba(0,229,255,.4);
+border-radius:4px;
+}
+
+.downloads{
+display:flex;
+flex-direction:column;
+gap:15px;
+margin-top:10px;
+}
+
+.download-btn{
+display:flex;
+align-items:center;
+gap:14px;
+padding:18px 24px;
+background:#111827;
+border:1px solid rgba(255,165,61,.3);
+border-radius:12px;
+color:#ffffff;
+text-decoration:none;
+font-size:15px;
+transition:.25s;
+}
+
+.download-btn:hover{
+border-color:#FFA53D;
+box-shadow:0 0 16px rgba(255,165,61,.35);
+transform:translateY(-2px);
+color:#FFA53D;
+}
+
+.download-btn svg{
+width:20px;
+height:20px;
+stroke:#FFA53D;
+flex-shrink:0;
+}
+
+.nav-arrow{
+position:fixed;
+top:50%;
+transform:translateY(-50%);
+z-index:50;
+width:56px;
+height:56px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(2,9,8,.7);
+border:1px solid rgba(255,165,61,.5);
+border-radius:50%;
+color:#FFA53D;
+text-decoration:none;
+filter:drop-shadow(0 0 6px rgba(255,165,61,.6));
+transition:.25s;
+}
+.nav-arrow:hover{
+background:rgba(255,165,61,.12);
+filter:drop-shadow(0 0 14px rgba(255,165,61,.9));
+transform:translateY(-50%) scale(1.08);
+}
+.nav-arrow svg{
+width:26px;
+height:26px;
+}
+.nav-arrow.left{ left:18px; }
+.nav-arrow.right{ right:18px; }
+
+</style>
+
+</head>
+
+<body>
+
+<a href="/suspicious" class="nav-arrow left" title="Previous">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</a>
+
+<a href="/investigation" class="nav-arrow right" title="Next">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+</a>
+
+<h1>Threat Report</h1>
+
+<div class="report">
+
+<h2>Full Analysis Report</h2>
+
+<div class="report-scroll" id="master-report-text">
+Loading...
+</div>
+
+</div>
+
+<div class="downloads">
+
+<a class="download-btn" href="/storage/runtime_dump.txt" download>
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+Correlated Information on Website
+</a>
+
+<a class="download-btn" href="/storage/screenshot_dump.txt" download>
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+URL Scanner Scraped Results
+</a>
+
+<a class="download-btn" href="/storage/dataset_dump.txt" download>
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+Autogluon Supervised/Unsupervised Algorithms Results
+</a>
+
+</div>
+
+<script>
+
+fetch("/reports/master_report.txt", { cache: "no-store" })
+  .then(response => {
+    if (!response.ok) throw new Error("Failed to load master_report.txt");
+    return response.text();
+  })
+  .then(text => {
+    document.getElementById("master-report-text").textContent = text;
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("master-report-text").textContent = "Unable to load report.";
+  });
+
+</script>
+
+</body>
+
+</html>

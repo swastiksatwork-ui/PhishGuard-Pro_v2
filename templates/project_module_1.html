@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PhishGuard</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+background:#05070d;
+overflow:hidden;
+height:100vh;
+color:white;
+
+}
+
+/* Animated Grid */
+
+.grid{
+
+position:absolute;
+width:200%;
+height:200%;
+
+background-image:
+
+linear-gradient(
+rgba(0,255,255,.1) 1px,
+transparent 1px),
+
+linear-gradient(
+90deg,
+rgba(0,255,255,.1) 1px,
+transparent 1px);
+
+background-size:50px 50px;
+
+transform:
+perspective(800px)
+rotateX(75deg);
+
+animation:gridMove 15s linear infinite;
+
+top:-50%;
+
+left:-50%;
+
+}
+
+@keyframes gridMove{
+
+from{
+transform:
+perspective(800px)
+rotateX(75deg)
+translateY(0);
+}
+
+to{
+transform:
+perspective(800px)
+rotateX(75deg)
+translateY(50px);
+}
+
+}
+
+/* Main Container */
+
+.container{
+
+position:relative;
+z-index:10;
+
+height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+/* Logo */
+
+.logo{
+
+font-size:90px;
+
+font-weight:900;
+
+letter-spacing:10px;
+
+color:#00ffff;
+
+text-shadow:
+0 0 10px #00ffff,
+0 0 20px #00ffff,
+0 0 40px #00ffff;
+
+margin-bottom:20px;
+
+}
+
+/* Subtitle */
+
+.subtitle{
+
+font-size:22px;
+
+opacity:.9;
+
+margin-bottom:50px;
+
+}
+
+/* Input Box */
+
+.input-box{
+
+width:700px;
+
+display:flex;
+
+gap:15px;
+
+}
+
+.input-box input{
+
+flex:1;
+
+padding:18px;
+
+background:#0f131d;
+
+border:1px solid cyan;
+
+color:white;
+
+font-size:16px;
+
+outline:none;
+
+border-radius:10px;
+
+}
+
+.input-box input:focus{
+
+box-shadow:
+0 0 20px cyan;
+
+}
+
+/* Button */
+
+.scan-btn{
+
+padding:18px 30px;
+
+background:cyan;
+
+border:none;
+
+font-weight:bold;
+
+cursor:pointer;
+
+border-radius:10px;
+
+transition:.3s;
+
+}
+
+.scan-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 0 30px cyan;
+
+}
+
+/* Stats Cards */
+
+.stats{
+
+margin-top:60px;
+
+display:flex;
+
+gap:25px;
+
+}
+
+.card{
+
+width:220px;
+
+padding:25px;
+
+background:
+rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
+border:
+
+1px solid rgba(
+0,255,255,.2);
+
+border-radius:15px;
+
+text-align:center;
+
+box-shadow:
+0 0 20px rgba(0,255,255,.1);
+
+}
+
+.card h2{
+
+color:#00ffff;
+
+margin-bottom:10px;
+
+}
+
+.card p{
+
+font-size:14px;
+
+opacity:.8;
+
+}
+
+/* Live Feed */
+
+.feed{
+
+position:absolute;
+
+right:20px;
+
+top:20px;
+
+width:320px;
+
+height:260px;
+
+background:
+
+rgba(255,255,255,.05);
+
+border:
+
+1px solid rgba(
+0,255,255,.3);
+
+backdrop-filter:
+blur(15px);
+
+border-radius:15px;
+
+padding:20px;
+
+overflow:hidden;
+
+}
+
+.feed h3{
+
+color:#00ffff;
+
+margin-bottom:15px;
+
+}
+
+.log{
+
+font-size:13px;
+
+margin-bottom:10px;
+
+color:#00ff88;
+
+}
+
+/* Footer */
+
+.footer{
+
+position:absolute;
+
+bottom:20px;
+
+font-size:14px;
+
+opacity:.5;
+
+}
+
+/* Social Badges */
+
+.social-strip{
+
+position:absolute;
+
+bottom:20px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+display:flex;
+
+gap:18px;
+
+z-index:10;
+
+}
+
+.social-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:12px 24px;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(0,255,255,.3);
+
+border-radius:999px;
+
+color:#e6e6e6;
+
+text-decoration:none;
+
+font-size:14px;
+
+font-weight:600;
+
+letter-spacing:.5px;
+
+transition:.25s;
+
+box-shadow:0 0 12px rgba(0,255,255,.08);
+
+}
+
+.social-badge:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 0 20px rgba(0,255,255,.35);
+
+border-color:cyan;
+
+color:cyan;
+
+}
+
+.social-badge svg{
+
+width:18px;
+
+height:18px;
+
+fill:currentColor;
+
+flex-shrink:0;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="grid"></div>
+
+<div class="container">
+
+<div class="logo">
+PHISHGUARD
+</div>
+
+<div class="subtitle">
+AI Powered Threat Intelligence Platform
+</div>
+
+<form method="POST">
+
+<div class="input-box">
+
+<input
+type="text"
+name="url"
+placeholder="Enter URL or suspected link...."
+required>
+
+<button 
+type="submit"
+class="scan-btn">
+
+START INVESTIGATION
+</button>
+
+</div>
+
+</form>
+
+<div class="stats">
+
+<div class="card">
+
+<h2>4.2M+</h2>
+
+<p>URLs Analyzed</p>
+
+</div>
+
+<div class="card">
+
+<h2>892K</h2>
+
+<p>Threats Detected</p>
+
+</div>
+
+<div class="card">
+
+<h2>97.8%</h2>
+
+<p>Detection Accuracy</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="feed">
+
+<h3>LIVE THREAT FEED</h3>
+
+<div class="log">
+[12:41] Suspicious Wallet Detected
+</div>
+
+<div class="log">
+[12:42] Phishing Campaign Identified
+</div>
+
+<div class="log">
+[12:43] Credential Harvesting Domain
+</div>
+
+<div class="log">
+[12:44] Malicious Redirect Found
+</div>
+
+<div class="log">
+[12:45] Wallet Drainer Activity
+</div>
+
+</div>
+
+<div class="footer" style="bottom:6px;">
+
+PHISHGUARD v2.0 | Threat Intelligence Engine
+
+</div>
+
+<div class="social-strip">
+
+<a href="https://github.com/swastiksatwork-ui/PhishGuard-Pro_v2" class="social-badge" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5v-1.83c-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.34 1.12 2.91.85.09-.67.35-1.12.64-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.79-4.58 5.05.36.32.68.95.68 1.92v2.85c0 .28.18.61.69.5A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+GitHub
+</a>
+
+<a href="https://in.linkedin.com/in/swastik-saha-658716316" class="social-badge" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 8h4V23h-4V8Zm7.5 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23h-4V8Z"/></svg>
+LinkedIn
+</a>
+
+<a href="https://www.linkedin.com/in/pourush-dey-9745b3378/?skipRedirect=true&utm_source=share_via&utm_content=profile&utm_medium=member_android" class="social-badge" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 8h4V23h-4V8Zm7.5 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23h-4V8Z"/></svg>
+LinkedIn
+</a>
+
+<a href="https://www.linkedin.com/in/devraj-gupta-65542637b/?skipRedirect=true&utm_source=share_via&utm_content=profile&utm_medium=member_android" class="social-badge" target="_blank" rel="noopener">
+<svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 8h4V23h-4V8Zm7.5 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23h-4V8Z"/></svg>
+LinkedIn
+</a>
+
+</div>
+
+</body>
+</html>

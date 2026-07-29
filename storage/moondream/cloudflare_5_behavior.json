@@ -1,0 +1,3 @@
+{
+    "answer": "{\n  \"Cookies\": {\n    \"name\": \"evenstogetpe\",\n    \"content\": \"undefined\",\n    \"type\": \"object\",\n    \"function\": \"function\"\n  },\n  \"JavaScript variables\": {\n    \"length\": 12,\n    \"type\": \"undefined\",\n    \"function\": \"function\"\n  },\n  \"Console log messages\": {\n    \"level\": 1,\n    \"source\": \"URL\",\n    \"message\": \"Messages logged to the web console\"\n  },\n  \"Security headers\": {\n    \"name\": \"HTTP response headers that can harden the security of a web application\",\n    \"value\": \"Not set\"\n  }\n}"
+}

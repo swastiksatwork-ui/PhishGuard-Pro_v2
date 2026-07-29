@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Pipeline Scan</title>
+
+<style>
+
+body{
+background:#05070d;
+color:white;
+font-family:Segoe UI;
+padding:50px;
+}
+
+.pipeline{
+display:flex;
+justify-content:space-between;
+margin-top:120px;
+}
+
+.node{
+
+width:150px;
+height:150px;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+
+background:#111827;
+
+border:2px solid cyan;
+
+box-shadow:
+0 0 25px cyan;
+
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+box-shadow:0 0 10px cyan;
+}
+
+50%{
+box-shadow:0 0 40px cyan;
+}
+
+100%{
+box-shadow:0 0 10px cyan;
+}
+
+}
+
+.line{
+height:4px;
+flex:1;
+background:cyan;
+margin-top:75px;
+}
+
+.terminal{
+
+margin-top:100px;
+
+height:300px;
+
+overflow-y:auto;
+
+overflow-x:hidden;
+
+background:black;
+
+border:1px solid cyan;
+
+padding:20px;
+}
+
+.log{
+margin-bottom:10px;
+color:#00ff88;
+}
+
+.redirect-row{
+margin-top:24px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:12px;
+text-align:center;
+}
+
+.redirect-btn{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:14px 26px;
+background:transparent;
+border:1.5px solid cyan;
+color:cyan;
+font-family:'Segoe UI', sans-serif;
+font-weight:bold;
+font-size:15px;
+letter-spacing:.5px;
+border-radius:8px;
+text-decoration:none;
+cursor:pointer;
+transition:.25s;
+}
+
+.redirect-btn:hover{
+background:cyan;
+color:#05070d;
+box-shadow:0 0 25px cyan;
+}
+
+.redirect-btn svg{
+width:18px;
+height:18px;
+fill:currentColor;
+}
+
+.redirect-note{
+font-size:13px;
+color:#8fa3ad;
+font-style:italic;
+width:100%;
+line-height:1.5;
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>Threat Analysis Pipeline</h1>
+
+<div class="pipeline">
+
+<div class="node">Data Acquisition</div>
+
+<div class="line"></div>
+
+<div class="node">Feature Extraction</div>
+
+<div class="line"></div>
+
+<div class="node">Wallet Intelligence</div>
+
+<div class="line"></div>
+
+<div class="node">ML Classification</div>
+
+<div class="line"></div>
+
+<div class="node">Threat Scoring</div>
+
+</div>
+
+<div class="terminal" id="terminal"></div>
+
+<div class="redirect-row">
+
+<a class="redirect-btn" href="/threat_score">
+<svg viewBox="0 0 24 24"><path d="M13 5l7 7-7 7v-4H4v-6h9V5z"/></svg>
+Redirect to Results So Far
+</a>
+
+<div class="redirect-note">
+Note: Results of some sections may include data from the previous scan until the current scan finishes updating all files. Either wait till the full scan completes for accurate/precise results.
+</div>
+
+</div>
+
+<script>
+
+const socket = io({
+    transports: ["websocket", "polling"]
+});
+
+const terminal = document.getElementById("terminal");
+
+function addLine(text){
+
+    const line = document.createElement("div");
+
+    line.className = "log";
+
+    line.textContent = text;
+
+    terminal.appendChild(line);
+
+    terminal.scrollTop = terminal.scrollHeight;
+
+}
+
+socket.on("terminal", function(data){
+
+    addLine(data.line);
+
+});
+
+socket.on("pipeline_complete", function(data){
+
+    addLine("➡️  Redirecting to Threat Score...");
+
+    window.location.href = data.redirect;
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+
+
+============================================================
+SCRAPPING.... http://steam-totp.pages.dev
+============================================================
+
+DEBUG SCRAPER OUTPUT
+{'final_url': 'http://steam-totp.pages.dev/', 'entity': 'steam-totp', 'title': 'Suspected Phishing | Cloudflare', 'text_sample': 'Suspected Phishing | Cloudflare Please enable\n      cookies. Warning Suspected Phishing This website has been reported for potential phishing. Phishing is when a site attempts to steal sensitive information by falsely presenting as a safe source. Learn More Cloudflare Ray ID: a22db63d6dec3b19 • Your IP: Click to reveal 2409:4088:8191:5391:c815:89a7:1676:b3ea • Performance & security by Cloudflare', 'links': ['https://www.cloudflare.com/learning/access-management/phishing-attack/', 'https://www.cloudflare.com/5xx-error-landing'], 'images': [], 'scripts': ['https://challenges.cloudflare.com/turnstile/v0/api.js'], 'form_count': 1}
+<class 'dict'>
+dict_keys(['final_url', 'entity', 'title', 'text_sample', 'links', 'images', 'scripts', 'form_count'])
+
+
+============================================================
+
+
+============================================================
+Entity
+============================================================
+steam-totp
+
+
+============================================================
+
+
+============================================================
+Final Resolved URL.....
+============================================================
+http://steam-totp.pages.dev/
+
+
+============================================================
+
+
+============================================================
+Scrapping Wikipedia.....
+============================================================
+{'found': False}
+
+
+============================================================
+
+
+============================================================
+Official Website
+============================================================
+None
+
+
+============================================================
+
+
+============================================================
+Searching Results.....
+============================================================
+[{'rank': 1, 'title': 'Steam TOTP Generator', 'url': 'https://steam-totp.pages.dev/'}, {'rank': 2, 'title': 'GitHub - DoctorMcKay/node-steam-totp: Lightweight module to generate Steam-style TOTP auth codes. · GitHub', 'url': 'https://github.com/DoctorMcKay/node-steam-totp'}, {'rank': 3, 'title': 'steam-totp - npm', 'url': 'https://www.npmjs.com/package/steam-totp'}, {'rank': 4, 'title': 'https://github.com/DoctorMcKay/node-steam-totp | Ecosyste.ms: Awesome', 'url': 'https://awesome.ecosyste.ms/projects/github.com/DoctorMcKay/node-steam-totp'}, {'rank': 5, 'title': 'steam_totp - Rust', 'url': 'https://docs.rs/steam-totp'}, {'rank': 6, 'title': 'steam-totp · PyPI', 'url': 'https://pypi.org/project/steam-totp/'}, {'rank': 7, 'title': 'node-steam-guide/Chapter 1 - Basics/Chapter 1.4 - TOTP at master · andrewda/node-steam-guide', 'url': 'https://github.com/andrewda/node-steam-guide/tree/master/Chapter+1+-+Basics/Chapter+1.4+-+TOTP'}, {'rank': 8, 'title': "GitHub - DoctorMcKay/php-steam-totp: PHP library to deal with Steam's proprietary TOTP algorithm.", 'url': 'https://github.com/DoctorMcKay/php-steam-totp'}, {'rank': 9, 'title': 'GitHub - fortis/go-steam-totp: Go package to generate Steam-style TOTP auth codes', 'url': 'https://github.com/fortis/go-steam-totp'}, {'rank': 10, 'title': 'Actions · GitHub Marketplace - Steam TOTP', 'url': 'https://github.com/marketplace/actions/steam-totp'}, {'rank': 11, 'title': 'node-steam-totp/README.md at master · DoctorMcKay/node-steam-totp', 'url': 'https://github.com/DoctorMcKay/node-steam-totp/blob/master/README.md'}, {'rank': 12, 'title': 'Extracting Steam TOTP from the Steam 3.0 Android app · keepassxreboot/keepassxc · Discussion #9591', 'url': 'https://github.com/keepassxreboot/keepassxc/discussions/9591'}, {'rank': 13, 'title': 'GitHub - DoctorMcKay/node-steam-user: Allows interaction with the Steam network via the Steam client protocol · GitHub', 'url': 'https://github.com/DoctorMcKay/node-steam-user'}, {'rank': 14, 'title': 'doctormckay/steam-totp - Packagist.org', 'url': 'https://packagist.org/packages/doctormckay/steam-totp'}, {'rank': 15, 'title': 'Question about Steam TOTP codes - Password Manager - Bitwarden Community Forums', 'url': 'https://community.bitwarden.com/t/question-about-steam-totp-codes/3513'}]
+
+
+============================================================
+
+
+============================================================
+Running Malware Scanners...
+============================================================
+
+Running Cloudflare...
+Testing URL: http://steam-totp.pages.dev/
+Scan submitted...
+Scan completed...
+Opening security
+Saved security
+Opening network
+Saved network
+Opening links
+Saved links
+Opening behavior
+Saved behavior
+Opening agent_readiness
+Saved agent_readiness
+Opening indicators
+Saved indicators
+Opening related
+Saved related
+Opening content
+Downloading HTML
+HTML Downloaded
+Source TXT Created
+
+Running VirusTotal...
+Testing URL: http://steam-totp.pages.dev/
+Searching Domain: www.steam-totp.pages.dev
+Scan submitted...
+Report loaded
+https://www.virustotal.com/gui/search?query=www.steam-totp.pages.dev
+Detection saved
+Opening details
+Saved details
+Opening relations
+Saved relations
+Opening community
+Saved community
+
+Running IPQS...
+
+Running URLVoid...
+Scan submitted...
+Report loaded
+{'cloudflare': {'source': 'cloudflare_radar', 'success': False, 'error': 'Event loop is closed! Is Playwright already stopped?', 'html_file': None, 'screenshot_file': None}, 'virustotal': {'source': 'virustotal', 'success': False, 'error': None, 'html_file': None, 'screenshot_file': 'storage/screenshots/virustotal/virustotal_detection.png'}, 'ipqs': {'success': True, 'screenshot': 'storage/screenshots/ipqs/ipqs_result.png'}, 'urlvoid': {'success': True, 'screenshot_file': 'storage/screenshots/urlvoid/urlvoid_result.png'}}
+
+
+============================================================
+
+
+============================================================
+Domain Cross-Checked.....
+============================================================
+{'whois_error': "module 'whois' has no attribute 'whois'", 'domaintools_text': 'Whois Lookup Captcha Home Research Toggle navigation DOMAIN TOOLS Profile Whois Bulk Parsed Whois IP Whois Lookup Whois History Domain Search Domain Report Screenshots Internet Statistics TLDpedia Connect Iris Investigate DNSDB Scout Reverse Whois Reverse IP Lookup Reverse NS Lookup Reverse IP Whois Hosting History DailyChanges IP Explorer My IP Address DNS Tools Monitor Iris Detect IP Monitor Brand Monitor Registrant Monitor Name Server Monitor Support Technical Documentation Whois Lookup Whois Login 0 Sign Up Validation Required Please help us validate that you are indeed human by solving the provided captcha. Go Solve the provided captcha and click Go to continue. Sitemap Blog Terms Privacy Contact California Privacy Notice Do Not Sell My Personal Information Â© 2026 DomainTools'}
+
+
+============================================================
+
+
+============================================================
+Scrapping Website Live.....
+============================================================
+{'title': 'Suspected Phishing | Cloudflare', 'text_sample': 'Suspected Phishing | Cloudflare Please enable\n      cookies. Warning Suspected Phishing This website has been reported for potential phishing. Phishing is when a site attempts to steal sensitive information by falsely presenting as a safe source. Learn More Cloudflare Ray ID: a22dbb2b18504838 • Your IP: Click to reveal 2409:4088:8191:5391:c815:89a7:1676:b3ea • Performance & security by Cloudflare', 'links': ['https://www.cloudflare.com/learning/access-management/phishing-attack/', 'https://www.cloudflare.com/5xx-error-landing'], 'scripts': ['https://challenges.cloudflare.com/turnstile/v0/api.js'], 'images': [], 'network_requests': [{'url': 'http://steam-totp.pages.dev/', 'method': 'GET', 'resource_type': 'document'}, {'url': 'https://steam-totp.pages.dev/', 'method': 'GET', 'resource_type': 'document'}, {'url': 'https://steam-totp.pages.dev/cdn-cgi/styles/cf.errors.css', 'method': 'GET', 'resource_type': 'stylesheet'}, {'url': 'https://challenges.cloudflare.com/turnstile/v0/api.js', 'method': 'GET', 'resource_type': 'script'}, {'url': 'https://steam-totp.pages.dev/cdn-cgi/images/icon-exclamation.png?1376755637', 'method': 'GET', 'resource_type': 'image'}, {'url': 'https://challenges.cloudflare.com/turnstile/v0/b/877c641b92f6/api.js', 'method': 'GET', 'resource_type': 'script'}], 'network_responses': [], 'wallet_requests': []}
+
+
+============================================================
+
+
+============================================================
+Analyzing Network.....
+============================================================
+{'anti_bot_services': ['https://challenges.cloudflare.com/turnstile/v0/api.js', 'https://challenges.cloudflare.com/turnstile/v0/b/877c641b92f6/api.js'], 'crypto_requests': [], 'telemetry_services': [], 'suspicious_post_requests': [], 'external_domains': ['steam-totp.pages.dev', 'challenges.cloudflare.com']}
+
+
+============================================================
+
+
+============================================================
+Showing Responses.....
+============================================================
+[]
+
+
+============================================================
+
+
+============================================================
+Checking User credential logging behaviour.....
+============================================================
+{'privacy_keywords_detected': [], 'suspicious_domains_detected': [], 'privacy_risk_score': 0}
+
+
+============================================================
+
+
+============================================================
+Checking for website embedded wallets.....
+============================================================
+[]
+
+
+============================================================
+
+
+============================================================
+Checking for wallets during load state...
+============================================================
+{'downloaded_scripts': ['https://challenges.cloudflare.com/turnstile/v0/api.js'], 'web3_indicators_found': [], 'rpc_methods_found': [], 'wallet_addresses_found': [], 'web3_presence_detected': 0, 'wallet_connection_detected': 0, 'wallet_risk_score': 0}
+
+
+============================================================

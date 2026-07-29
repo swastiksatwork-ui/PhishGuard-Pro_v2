@@ -1,0 +1,3 @@
+{
+    "answer": "{\n  \"URL Scanner\": {\n    \"Issue Date\": \"July 28, 2026\",\n    \"Expiry Date\": \"July 29, 2027\",\n    \"Expiry Date\": \"17:06:38\"\n  },\n  \"Risks\": {\n    \"Summary\": \"Practices that may pose security risks\",\n    \"Phishing\": \"Phishing\"\n  },\n  \"Security Violations\": {\n    \"Subject\": \"Security violations 0 found\",\n    \"Expiry Date\": \"July 29, 2027\",\n    \"Expiry Date\": \"17:06:38\"\n  },\n  \"Certificates\": {\n    \"Subject\": \"SSL/TLS Certificates enable websites to encrypt transactions between the client and the server and provide server identity verification\",\n    \"Expiry Date\": \"July 29, 2027\",\n    \"Expiry Date\": \"17:06:38\"\n  }\n}"
+}

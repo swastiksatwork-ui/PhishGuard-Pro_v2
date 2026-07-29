@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Suspicious Site Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#03040a;
+    --card:#0a0d14;
+  }
+  body{
+    background:
+      radial-gradient(circle at 15% 0%, rgba(255,0,0,0.06), transparent 40%),
+      var(--bg);
+    font-family:'JetBrains Mono', monospace;
+    color:#e6e6e6;
+    padding:40px;
+    margin:0;
+  }
+  h1{
+    font-family:'Share Tech Mono', monospace;
+    font-size:30px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin:0 0 14px 0;
+    color:#ff2d2d;
+    text-shadow:0 0 6px rgba(255,45,45,0.55), 0 0 18px rgba(255,45,45,0.25);
+  }
+  .panel{
+    background:linear-gradient(180deg, rgba(255,0,0,0.03), rgba(0,0,0,0)), var(--card);
+    border-radius:6px;
+    padding:26px 30px;
+    margin-bottom:34px;
+    border-left:3px solid #ff2d2d;
+    border-top:1px solid rgba(255,45,45,0.15);
+    box-shadow: inset 0 0 40px rgba(255,0,0,0.04), 0 0 24px rgba(255,0,0,0.05);
+  }
+
+  /* ---- Suspicious Features: terminal / glitch style ---- */
+  .finding{
+    font-family:'Share Tech Mono', monospace;
+    font-size:18px;
+    line-height:1.9;
+  }
+  .finding-line{
+    display:block;
+    white-space:pre-wrap;
+    word-break:break-word;
+    text-shadow:0 0 4px currentColor, 0 0 12px rgba(255,0,0,0.35);
+    animation:flicker 4.5s infinite;
+    animation-delay:calc(var(--i) * 0.35s);
+  }
+  .finding-line::before{ content:""; }
+  @keyframes flicker{
+    0%,96%,100%{ opacity:1; }
+    97%{ opacity:0.55; }
+    98%{ opacity:0.9; }
+  }
+  .cursor{
+    display:inline-block;
+    width:9px; height:16px;
+    background:#ff2d2d;
+    box-shadow:0 0 8px #ff2d2d;
+    margin-left:4px;
+    vertical-align:-2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .meta-row{
+    font-family:'Share Tech Mono', monospace;
+    font-size:12px;
+    letter-spacing:1px;
+    color:#6b7280;
+    margin-top:20px;
+    text-transform:uppercase;
+  }
+
+  /* ---- Technologies Used: glowing rectangular pill badges ---- */
+  .tech-row{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .tech-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:11px 28px;
+    font-family:'Share Tech Mono', monospace;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--tc);
+    border:1.5px solid var(--tc);
+    border-radius:999px;
+    background:color-mix(in srgb, var(--tc) 10%, transparent);
+    box-shadow:
+      0 0 8px color-mix(in srgb, var(--tc) 70%, transparent),
+      0 0 20px color-mix(in srgb, var(--tc) 35%, transparent),
+      inset 0 0 10px color-mix(in srgb, var(--tc) 20%, transparent);
+    text-shadow:0 0 6px var(--tc);
+    animation:pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ filter:brightness(1); }
+    50%{ filter:brightness(1.25); }
+  }
+  .nav-arrow{
+    position:fixed;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:50;
+    width:56px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(2,9,8,.7);
+    border:1px solid rgba(255,45,45,.5);
+    border-radius:50%;
+    color:#ff2d2d;
+    text-decoration:none;
+    filter:drop-shadow(0 0 6px rgba(255,45,45,.6));
+    transition:.25s;
+  }
+  .nav-arrow:hover{
+    background:rgba(255,45,45,.12);
+    filter:drop-shadow(0 0 14px rgba(255,45,45,.9));
+    transform:translateY(-50%) scale(1.08);
+  }
+  .nav-arrow svg{
+    width:26px;
+    height:26px;
+  }
+  .nav-arrow.left{ left:18px; }
+  .nav-arrow.right{ right:18px; }
+</style>
+</head>
+<body>
+
+<a href="/theatrics" class="nav-arrow left" title="Previous">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</a>
+
+<a href="/reports" class="nav-arrow right" title="Next">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+</a>
+
+  <h1>Suspicious Features</h1>
+  <div class="panel">
+    <div class="finding" id="findings"></div>
+    <div class="meta-row" id="meta"></div>
+  </div>
+
+  <h1>Technologies Used</h1>
+  <div class="panel">
+    <div class="tech-row" id="tech"></div>
+  </div>
+
+<script>
+/* Default data — replace by fetching sus_data.json if served over http(s) */
+const DEFAULT_DATA = {
+  "target": "example-site.tld",
+  "generated_at": "2026-07-14T00:00:00Z",
+  "risk_level": "Critical",
+  "findings": [
+    { "text": "Requests are redirected at /wsdm-cgi/ resources", "level": 1, "shade": "#ff3b3b" },
+    { "text": "turnstile/v0/api.js - script suggests use of third-party that can be malicious", "level": 2, "shade": "#ff5c5c" },
+    { "text": "cdn-cgs endpoints do not match declared domain", "level": 1, "shade": "#ff2d2d" },
+    { "text": "etc, etc...", "level": 1, "shade": "#c81515" }
+  ],
+  "technologies": [
+    { "name": "HTTPS", "color": "#ff3b3b" },
+    { "name": "HSTS",  "color": "#8b3bff" },
+    { "name": "HTML",  "color": "#ffd60a" },
+    { "name": "JS",    "color": "#3b82ff" }
+  ]
+};
+
+function render(data){
+  const findingsEl = document.getElementById("findings");
+
+findingsEl.innerHTML = data.suspicious_features.map((f, i) => {
+
+    const severityColor = {
+
+        critical: "#ff2d2d",
+
+        high: "#ff6b35",
+
+        medium: "#ffb020",
+
+        low: "#ffd60a",
+
+        info: "#00e5ff"
+
+    };
+
+    const severityHashes = {
+
+        critical: 4,
+
+        high: 3,
+
+        medium: 2,
+
+        low: 1,
+
+        info: 1
+
+    };
+
+    const color = severityColor[f.severity] || "#ffffff";
+
+    const hashes = "#".repeat(severityHashes[f.severity] || 1);
+
+    const last = i === data.suspicious_features.length - 1;
+
+    return `<span class="finding-line" style="color:${color}; --i:${i}">${hashes} ${f.text}${last ? '<span class="cursor"></span>' : ''}</span>`;
+
+}).join("");
+
+  const meta = data.footer || data;
+  document.getElementById('meta').textContent =
+    `TARGET: ${meta.target}  //  RISK: ${meta.risk || meta.risk_level}  //  SCAN: ${meta.scan_time || meta.generated_at}`;
+
+  const categoryColor = {
+    frontend: "#3b82ff",
+    backend: "#22c55e",
+    security: "#ff3b3b",
+    database: "#8b3bff",
+    network: "#ffb020",
+    infrastructure: "#00e5ff"
+  };
+
+  const techEl = document.getElementById('tech');
+  techEl.innerHTML = data.technologies.map(t => {
+    const color = t.color || categoryColor[(t.category || "").toLowerCase()] || "#e6e6e6";
+    return `<div class="tech-badge" style="--tc:${color}">${t.name}</div>`;
+  }).join('');
+}
+
+fetch("/reports/sus_features.json", {
+
+    cache: "no-store"
+
+})
+
+.then(response => {
+
+    if (!response.ok)
+
+        throw new Error("Failed to load sus_features.json");
+
+    return response.json();
+
+})
+
+.then(render)
+
+.catch(err => {
+
+    console.error(err);
+
+    render(DEFAULT_DATA);
+
+});
+</script>
+</body>
+</html>

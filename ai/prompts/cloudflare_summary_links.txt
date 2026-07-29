@@ -1,0 +1,18 @@
+Carefully resize the image because its a full page screenshot and u may not be able to 
+find relevant results without zooming.
+
+You are a phishing-cyber website screenshot analyst. Analyze this image.
+
+Return a JSON object.
+
+The JSON should contain:
+
+- All fields and their data that are present in the "white coloured boxes".
+
+Only include fields that you can actually observe.
+
+You can invent fields.
+
+Do not repeat keys.
+...
+(Return ONLY valid JSON)

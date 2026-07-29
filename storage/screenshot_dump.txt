@@ -1,0 +1,1560 @@
+
+================================================================================
+VIRUSTOTAL
+================================================================================
+
+----- virustotal_community.png -----
+WWW:
+steam-totp pages dev
+12
+D
+"8:
+Sign in
+Sign up
+10/91 security vendors flagged this domain as malicious
+Reanalyze
+More
+10
+191
+WWWsteam-totp pages dev
+Registrar
+Creation Date
+Last Analysis Date
+steam-totppages dev
+CloudFlare; Inc:
+Syears ago
+7days ago
+Community
+Score
+Phishing (alphaMountainai)
+DETECTION
+DETAILS
+RELATIONS
+COMMUNITY
+Join our Communityand enjoy additional community insights and crowdsourced detections, plus an API
+to automate checks:
+Comments (0)
+No comments found
+You must be signedin to post a comment
+Our product
+Community
+Tools
+Premium Services
+Documentation
+Contact Us
+Join Community
+API Scripts
+Get a demo
+Searching
+Get Support
+Vote and Comment
+YARA
+Intelligence
+Reports
+How It Works
+Contributors
+Desktop Apps
+Hunting
+APIv3 |v2
+ToS | Privacy Notice
+Users
+Browser Extensions
+Graph
+Use Cases
+Blog | Releases
+Community Buzz
+Mobile App
+APIv3 |v2
+key "
+Top"
+
+----- virustotal_details.png -----
+WWWsteam-totp pagesdev
+1
+B
+~8:
+Sign in
+Sign up
+10/91 security vendors flagged this domain as malicious
+Reanalyze
+More
+10
+[91
+WWWsteam-totp pagesdev
+Registrar
+Creation Date
+Last Analysis Date
+steam-totp pages dev
+CloudFlare; Inc:
+S years ago
+'daysago
+Community
+Score
+Phishing (alphaMountain.ai)
+DETECTION
+DETAILS
+RELATIONS
+COMMUNITY
+Join our Community and enjoy additional community insights and crowdsourced detections; plus an API key to automatechecks:
+Categories 0
+alphaMountain.ai
+Phishing (alphaMountain ai)
+Last DNS records
+Record type
+Value
+300
+172.66.44.238
+300
+172.66.47.18
+AAAA
+300
+2606.4700.310€ ac42.2f12
+AAAA
+300
+2606.4700.310C:ac42 2cee
+Last HTTPS Certificate
+JARM Fingerprint
+27d40d40d00040d00042d43d00041df04c41293ba84f6efe3a613622f983e6
+Last HTTPS Certificate
+Data:
+Version:
+V3
+Serial Number
+cs003fddcffe38e61396777338ed368a
+Thumbprint:
+ca727c616ccSb7298bd523bdee3376d13c22fa91
+Signature Algorithm:
+Issuer: C-US
+0-Google Trust Services
+CN-WE1
+Validity
+Not
+Before: 2026-06-18 22:32:25
+Not
+After: 2026-09-16 23:30:52
+Subject:
+CN-steam-totp-pages.dev
+Subject Public
+Info:
+Public
+Algorithm
+EC
+OID: secp2s6r1
+30:59:30:13:06:07:2a:86:48:ce:3d:02:01:06:08:
+2a:86.48:ce:3d:03:01:07:03:42:00:04:f3:1c:6a:
+19:ca:a7:2c:23:72:08:d2:e4:20:f5:91:fb:9e:2e:
+40:e4:ef:84:19:93:84.81:64:da:f2:a8:b6:f6:62:
+ab:d0
+@a:b5:ff:66:22:34:f0:03:8C:31:b5:20:1b:
+Whois Lookup
+Admin City:
+DATA REDACTED
+Admin City:
+REDACTED FOR PRIVACY
+Admin Country: DATA REDACTED
+Admin Country: REDACTED FOR PRIVACY
+Admin Organization: DATA REDACTED
+Admin Organization: REDACTED FOR PRIVACY
+Admin Postal Code:
+DATA REDACTED
+Admin Postal
+Code
+REDACTED FOR
+PRIVACY
+Admin State/Province: DATA
+REDACTED
+Admin State/Province:
+REDACTED FOR
+PRIVACY
+Billing City: DATA
+REDACTED
+Billing City: REDACTED FOR
+PRIVACY
+Billing Country: DATA
+REDACTED
+Billing Country=
+REDACTED FOR PRIVACY
+Billing Organization:
+DATA REDACTED
+Billing Organization:
+REDACTED FOR
+PRIVACY
+Billing Postal Code: DATA REDACTED
+Billing Postal Code: REDACTED FOR PRIVACY
+Billing State/Province: DATA REDACTED
+Google results 0
+Sort by
+Your search did not match any results.
+Search ""www steam-totppages dev"
+on
+Google
+ENHANCED BY Google
+Our product
+Community
+Tools
+Premium Services
+Documentation
+Contact Us
+Join Community
+API Scripts
+Get a demo
+Searching
+Get Support
+Vote and Comment
+YARA
+Intelligence
+Reports
+How It Works
+Contributors
+Desktop Apps
+Hunting
+APIv3 | v2
+ToS | Privacy Notice
+Top Users
+Browser Extensions
+Graph
+Use Cases
+Blog
+Releases
+Community Buzz
+Mobile App
+APIv3 | v2
+Key
+Key
+pub:
+
+----- virustotal_detection.png -----
+WWW:
+steam-totp pages dev
+I 2 F 0
+"8:
+Sign in
+Sign up
+Did you intend to search across the file corpus instead? Click here
+10/91 security vendors flagged this domain as malicious
+C Reanalyze
+More
+10
+191
+WWWsteam-totp pages dev
+Registrar
+Creation Date
+Last Analysis Date
+steam-totppages dev
+CloudFlare, Inc:
+Syears ago
+7daysago
+Community
+Score
+Phishing (alphaMountainai)
+DETECTION
+DETAILS
+RELATIONS
+COMMUNITY
+Join our Communityand enjoy additional community insights and crowdsourced detections, plus an API
+to automate checks:
+Security vendors' analysis
+Doyou want to automate checks?
+alphaMountain ai
+Phishing
+BitDefender
+Phishing
+CyRadar
+Phishing
+ESET
+Phishing
+Fortinet
+Phishing
+G-Data
+Phishing
+Lionic
+Phishing
+Sophos
+Phishing
+VIPRE
+Phishing
+Webroot
+Malicious
+Ein
+Annen
+Ennn
+Sn
+key "
+
+----- virustotal_relations.png -----
+WWWsteam-totp pages dev
+1
+5
+"8:
+Sign in
+Sign up
+10/91 security vendors flagged this domain as malicious
+C Reanalyze
+More
+10
+191
+WWWsteam-totp pages dev
+Registrar
+Creation Date
+Last Analysis Date
+steam-totp pages dev
+CloudFlare, Inc:
+5 years ago
+7
+ago
+Community
+Score
+Phishing (alphaMountainai)
+DETECTION
+DETAILS
+RELATIONS
+COMMUNITY
+Join our Communityand enjoy additional community insights and crowdsourced detections, plus an API
+to automate checks:
+Passive DNS Replication (2)
+Date resolved
+Detections
+Resolver
+P
+2026-06-20
+0 /91
+VirusTotal
+172.66.47.18
+2026-06-20
+0 /91
+VirusTotal
+172.66.44.238
+Historical SSL Certificates (1)
+First seen
+Subject
+Thumbprint
+2026-06-19
+steam-totp pages dev
+ca727c616ccSbzz98bd523bdee3376d13c22fa91
+Graph Summary
+2 resolutions
+Our product
+Community
+Tools
+Premium Services
+Documentation
+Contact Us
+Join Community
+API Scripts
+Get a demo
+Searching
+Get Support
+Vote and Comment
+YARA
+Intelligence
+Reports
+How It Works
+Contributors
+Desktop Apps
+Hunting
+APIv3 | v2
+ToS | Privacy Notice
+Users
+Browser Extensions
+Graph
+Use Cases
+Blog | Releases
+Community Buzz
+Mobile App
+APIv3 | v2
+days 
+key
+Top
+
+================================================================================
+CLOUDFARE
+================================================================================
+
+----- cloudfare_summary.png -----
+Cloudflare Radar
+Search for locations; autonomous systems; reports; domains and more
+English
+Overview
+https:/ [steam-totp-pages dev/
+Download
+4
+Traffic
+Scan ID: 0458f3c4-55f6-4ecd-93ec-91234bc141df0
+Finished
+Submitted URL: http://steam-totp pages dev/
+Redirec eo
+0
+Bots
+Report finished: Jul 29, 2026, 17.06.29
+Public
+Security
+Summary
+Security
+Network
+Links
+Behavior
+Agent Readiness
+Nex
+Content
+Indicators
+Related
+Connectivity
+Routing
+Summary
+53
+DNS
+title
+Security Verdict
+Suspected Phishing | Cloudflare
+X Malicicus
+Tools
+Domain
+Security violations
+Data Explorer
+steam-totp pages dev
+None found
+URL Scanner
+CIPA Filter
+Phishing
+Certificates
+Network Quality Test
+Report Miscategorization
+Found
+View live domain categorization 7
+Reports
+Rank
+API
+Top >200000 domains
+Redirect
+Resources
+307
+>
+403
+Collapse sidebar
+This website contacted 2 IP addresses in 1
+country across 2 domains to make 5 HTTP requests. The main IP is
+172.66.44.238, located in the United States and belongs to CLOUDFLARENET: The main domain is steam-totp pages dev:
+Statistics
+Requests
+Domains
+Bytes transferred
+Bytes total
+5
+2
+33 kB
+111 kB
+Documents
+Scripts
+StyleSheets
+Images
+2
+2
+1
+1
+Fonts
+Cookies
+ASNs
+Links
+1
+2
+Technologies
+3 identified
+Name
+Description
+Categories
+Cloudflare is a web-infrastructure and website-security company; providing
+Cloudflare
+content-delivery-network services, DDoS mitigation, Internet security, and
+CDN
+distributed domain-name-server services_
+HTTP Strict Transport Security (HSTS) informs browsers that the site should only
+HSTS
+Securty
+be accessed using HTTPS.
+HTTP/3 is the third major version of the Hypertext Transfer Protocol used to
+HTTP/3
+Miscellaneous
+exchange information on the World Wide Web.
+2026 Cloudflare,
+Privacy Policy
+Terms of Use
+Disclosure
+Trust & Safety
+Trademark
+Support
+Page
+Inc:
+
+================================================================================
+CLOUDFLARE
+================================================================================
+
+----- cloudflare_agent_readiness.png -----
+Cloudflare Radar
+https:/ /ste
+totp-pages devl
+Security
+nnectivity
+Readiness : Level 0
+Not Ready
+2 blog post L
+{ Quality Test
+Discoverabilitv
+{robots txt with
+~GET /robots txt
+TML page served for & missing path)
+soft-404 or HTN
+tercbatd teturf;theasi
+sitemapxml
+Evidence
+~GET /sitemap-indexxml
+~GET Iiten
+How to fix
+Homepage returned status
+~Conclusion
+retumed status 403
+Eforcatovac Is@AYounk
+~DoH SVCB
+m-totp pages dev
+~pages dev
+)-pages dev
+1se body <
+ID) SVCB/H
+ DNSSEC requireme
+'How to fix
+lidating resol
+~efnteterarpi
+Web Bot Auth
+I Crawler Rules
+-this is a soft-404 {HTMI page served fora missing
+Conclusion
+GET /robots txt
+ft-404 (HTML
+ContContezensigna}
+API Cataloa
+instead of JSON
+E77
+onOvenksetsjecn ,
+eancystaculd healtne
+GET / well-know
+inloauth-authorizationa
+cted-resource
+Evidence
+GET /authmd
+Ocio=
+GET / well_know
+ HTML (soft-404)
+veadabilities_
+atcntsesvergf
+AZA Aqent Ca
+Irned HTML instead of ISON
+~instead of JSON
+OInterfacese(wit
+Ckandninteanst
+ntapabitheleza
+instead of JSON
+andiscgkell
+~descriptic
+port WebMCP
+How to fix
+APItby
+Jexposes Your site'5 key
+~unregist
+Commerce
+nt-Ready [
+Trust & Safety | Trademark | Suppor
+n no longer
+
+----- cloudflare_behavior.png -----
+Cloudflare Radar
+Search for locations, autonomous systems, reports, domains and
+more:..
+English
+Overview
+https:/ [steam-totp-pages dev/
+Download
+c
+Traffic
+Scan ID: 0458f3c4-55f6-4ecd-93ec-91234bc141df 61
+Finished
+Submitted URL: http:/ /steam-totp pagesdev/
+Redirected
+Bots
+Report finished: Jul 29, 2026, 17.06.29
+Public
+Security
+Summary
+Security
+Network
+Links
+Behavior
+Agent Readiness
+New'
+Content
+Indicators
+Related
+Connectivity
+Routing
+Cookies
+0 found
+583
+DNS
+Cookies are small text files stored on a user's device, often used to remember user preferences and enable personalized
+experiences
+Tools
+Data Explorer
+URL Scanner
+JavaScript variables
+12 found
+Network Quality Test
+Global JavaScript variables loaded on the window object of a page, are variables declared outside of functions and accessible
+Reports
+from
+anywhere in the code within the current scope
+API
+Name
+Type
+Resources
+event
+undefined
+onbeforetoggle
+object
+Collapse sidebar
+sharedStorage
+object
+documentPicturelnPicture
+object
+fetchLater
+function
+onpageswap
+object
+onpagereveal
+object
+fence
+object
+onscrollend
+object
+onTurnstileSuccess
+function
+Page 1 of 2
+Console log messages
+1
+found
+Messages logged to the web console
+Level
+Source
+Message
+URL
+https:/ /steam-totp pagesdev/
+Error
+Network
+Text
+Failed
+to load resource:
+the server
+res
+ponded With
+status
+of 403 (Forbidden)
+Security headers
+0 found
+HTTP response headers that can harden the security of a web
+application
+No: set
+Name
+Value
+Support
+Info
+Strict-Transport-Security
+Gcod
+X-Frame-Options
+Gcod
+X-Content-Type-Options
+Gcod
+Content-Security-Policy
+Gcod
+Referrer-Policy
+Gcod
+Clear-Site-Data
+Gcod
+X-Permitted-Cross-Domain-Policies
+Gcod
+Permissions-Policy
+New
+Cross-Origin-Embedder-Policy
+New
+Cross-Origin-Opener-F
+New
+Cross-Origin-Resource-Policy
+New
+X-XSS-Protection
+Deprecated
+Feature-Policy
+Deprecated
+Expect-CT
+Deprecated
+Public-[
+Pins
+Deprecated
+2026 Cloudflare; Inc;
+Privacy Policy
+Terms of Use
+Disclosure
+Trust & Safety
+Trademark
+Support
+Policy
+Key-
+
+----- cloudflare_indicators.png -----
+Cloudflare Radar
+Search for locations, autonomous systems; reports; domains and more
+English
+Overview
+https:/ [steam-totp-pages dev/
+Download
+Traffic
+Scan ID: 0458f304-55f6-4ecd-93ec-91234bc141df
+Finished
+Submitted URL: http:/ steam-totp pages dev/
+Redirected
+Bots
+Report finished: Jul 29, 2026, 17.06.29
+Public
+Security
+Summary
+Security
+Network
+Links
+Behavior
+Agent Readiness
+New
+Content
+Indicators
+Related
+Connectivity
+Routing
+Indicators
+DNS
+Indicators refer to ASNs; domains, hashes, IPs or URLs that may suggest potential security threats You can click through each
+to
+investigate further details
+Tools
+Data Explorer
+Domains
+2 identified
+URL Scanner
+challenges.cloudflare.com
+Network Quality Test
+steam-totp.pages
+dev
+Jl
+Reports
+ASNs
+1 found
+4P
+API
+AS13335
+Resources
+IP addresses
+2 identified
+Collapse sidebar
+104.18.94.41
+172.66.44.238
+Hashes
+6 identified
+7f12210a3d56ac572eb93a884adeeeb5f3fbSafoblfo9a0e58a2a7787+4987b8
+84e3c77025ace5af143972b4a40f0834dcdfd42449d4636a57e62326f1663091
+{1591a5221136049438642155691a26c68e256724173d7ebe975b09a77662016
+ddfd7el0e1d31d8fd69777adec0297c6830c2712c0a09fdf28c0f739590e64ae
+9a013830d670c30a598cc6436316b5dace292048a16150dd86374064f20f1990
+9abebalecbd2330d21371oaacdbe2749d9444c15+6d623074fdf0234-869bc51
+2026 Cloudflare, Inc:
+Privacy Policy
+Terms of Use
+Disclosure
+Trust & Safety
+Trademark
+Support
+
+----- cloudflare_links.png -----
+Cloudflare Radar
+Search for locations, autonomous systems, reports, domains and more
+English
+Overview
+https:/ [steam-totp-pages dev/
+Download
+Traffic
+Scan ID: 0458f304-55f6-4ecd-93ec-91234bc141df
+Finished
+Submitted URL: http:/ steam-totp pages dev/
+Redirected
+Bots
+Report finished: Jul 29, 2026, 17.06.29
+Public
+Security
+Summary
+Security
+Network
+Links
+Behavior
+Agent Readiness
+New
+Content
+Indicators
+Related
+Connectivity
+Routing
+Links
+2 found
+DNS
+The outgoing links identified from the page
+Tools
+Link
+Text
+Data Explorer
+https:/ /www.cloudflare com/learning/access-management/phishing-
+URL Scanner
+Learn More
+attacky
+Network Quality Test
+https:/ /www.cloudflare com/Sxx-error-landing
+Cloudflare
+Jl
+Reports
+4P
+API
+Resources
+Collapse sidebar
+2026 Cloudflare, Inc:
+Privacy Policy
+Terms of Use
+Disclosure
+Trust & Safety
+Trademark
+Support
+
+----- cloudflare_network.png -----
+Cloudflare Radar
+Search for locations, autonomous systems, reports, domains and more_
+English
+Overview
+https:] [steam-totp-pages dev/
+Download
+Traffic
+Scan ID: 0458f3c4-55f6-4ecd-93ec-91234bc141df 1
+Finished
+Submitted URL: http:| /steam-totp pages dev/
+Redirec ed
+Bots
+Report finished: Jul 29, 2026, 17.06.29
+Public
+Security
+Summary
+Security
+Network
+Links
+Behavior
+Agent Readiness
+New'
+Content
+Indicators
+Related
+Connectivity
+Routing
+HTTP transactions
+5 detected
+53
+DNS
+A list of all the HTTP requests and responses made by the resource
+the current session
+Tools
+Filter
+AlI
+Document
+CSS
+JS
+Fetch XHR
+Image
+Font
+Other
+Data Explorer
+URL Scanner
+Method
+Status
+Resource
+Type
+Size
+IP
+Network Quality Test
+Protocol
+Text
+Path
+MIME-Type
+Transfer
+Location
+Reports
+GET
+403
+Primary Request
+Document
+4.36kB
+172.66.44.238
++
+http/1.1
+Forbidden
+https:/ /steam-totp pages dev/
+text/html
+1,56kB
+AS13335 (US)
+API
+Redirect chain
+http: {steam-
+pages dev/
+307
+Resources
+https:/ {steam-totp pages dev/
+GET
+200
+cferrors cSS
+StyleSheet
+23.49kB
+172.66.44.238
+http/1.1
+Ok
+https:| /steam-totp pages dev/cdn-cgi/styles
+text/css
+4,48kB
+AS13335 (US)
+Collapse sidebar
+GET
+200
+icon-exclamation png
+Image
+452B
+172.66.44.238
+http/1.1
+Ok
+https:| /steam-totp pages dev/cdn-cgifimages
+image/png
+4528
+4S13335 (US)
+GET
+200
+apijs
+Script
+80.54kB
+104.18.94.41
+http/1.1
+OK
+https:/ /challenges cloudflare com/turnstilevo/b/
+application/javascript
+26.06kB
+4S13335 (US)
+877c641b92f6
+Redirect chain
+https:l challenges cloudflare com/turnstil;"
+302
+https:/ {chal
+cloudflare com/turnstilefvo/b_
+GET
+200
+favicon.ico
+Other
+2.36kB
+172.66.44.238
+http/1.1
+Ok
+https: / /steam-totp pages dev
+text/html
+725B
+4S13335 (US)
+Page history
+2 entries found
+HTTP, JavaScript or Meta tag redirects
+http:/ Isteam-totp pages dev/
+307
+https:/ /steam-totp pages dev/
+403
+Redirect chains
+2 found
+Redirects that were detected on the HTTP transactions
+Redirect chain for transaction #1
+http:} Isteam-totp pages dev/
+307
+https:/Isteam-totp pages dev/
+Redirect chain for transaction #4
+https:/ /challenges cloudflare com /turnstile/vO/apijs
+302
+https:/ challenges cloudflare com /turnstile/v0/b/877c641b92f6/apijs
+IP addresses
+2 identified
+IP addresses contacted during the page load
+Size
+IP
+Location
+ASN
+Requests
+Transfer
+City and County of San Francisco,
+AS13335
+CLOUDFLARENET
+80.54kB
+104.18.94.41
+2
+United States
+(US)
+26.06kB
+City and County of San Francisco,
+AS13335
+CLOUDFLARENET
+30.65kB
+172.66.44.238
+United States
+(US)
+7.19kB
+DNS records
+4 found
+DNS records provide information about a domain including what IP address it's associated with
+Type
+Name
+Content
+DNSSEC
+A
+steam
+-totp pagesdev
+172.66.44.238
+X Disabled
+A
+steam-totp pages dev
+172.66.47.18
+X Disaoled
+AAAA
+steam-totp pages dev
+2606.4700.310c ac42.2cee
+X Disabled
+AAAA
+steam-totp pages dev
+2606.4700.310c ac42.2f12
+Disaoled
+2026 Cloudflare, Inc;
+Privacy Policy
+Terms of Use
+Disclosure
+Trust & Safety
+Trademark
+Support
+during
+toto;
+llenges:
+
+----- cloudflare_related.png -----
+Cloudflare Radar
+Search for locations, autonomous systems, reports; domains and
+more;.
+English
+Overview
+https:] steam-totp-pagesdev/
+Download
+4
+Traffic
+Scan ID: 0458f3c4-55f6-4ecd-93ec-91234bc141df1
+Finished
+Submitted URL: http:/ /steam-totp pages dev/
+Redirec ed
+0
+Bots
+Report finished: Jul 29, 2026, 17.06.29
+Public
+Security
+Summary
+Security
+Network
+Links
+Behavior
+Agent Readiness
+Ne
+Content
+Indicators
+Related
+4
+Connectivity
+Routing
+Related scans
+583
+DNS
+Scans in the last 7 days that share similar properties
+Tools
+Same ASN
+Data Explorer
+URL
+Verdict
+Created
+URL Scanner
+Network Quality Test
+https:| /radisonbet519.com/
+No c assification
+Jul 29, 2026, 17.07
+Reports
+https:| /superbetin-adresimobilicu/
+X Malicious
+Jul 29, 2026, 17.07
+API
+https:| /superbetin2082.com/
+X Malicious
+Jul 29,2026, 17.07
+Resources
+https:/ /metroeastdeckandfenceandhomeexteriors com/
+No c assification
+Jul 29, 2026, 17.07
+https:/ /romabet-fire icu/
+X Malicious
+Jul 29,2026, 17.07
+https:| /qrandpashabet8240.com/
+X Malicious
+Jul 29, 2026, 17.07
+Collapse sidebar
+https:| /romabetswebicu/cgi-sys/defaultwebpage.cgi
+X Malicious
+Jul 29, 2026, 17.07
+https: | /grandpashabet-betinadresi2o26.topl
+X Malicious
+Jul 29,2026, 17:07
+https:| /slon4.at/cdn-cgi/phish-bypass?atok-QJg ElrR_XZQdk4h8Ob9dkj ceZiZrhld8.
+No c assification
+Jul 29,2026, 17:07
+https:| /rateiodrive com/auvp-a-unica-verdade-possivel-raul-sena/
+No classification
+Jul 29, 2026, 17.06
+Same IP
+Same HTML structure
+2026 Cloudflare, Inc
+Privacy Policy
+Terms of Use
+Disclosure
+Trust & Safety
+Trademark
+Support
+
+----- cloudflare_security.png -----
+Cloudflare Radar
+Search for locations, autonomous systems; reports; domains and more
+English
+Overview
+https:/ [steam-totp-pages dev/
+Download
+Traffic
+Scan ID: 0458f304-55f6-4ecd-93ec-91234bc141df
+Finished
+Submitted URL: http:/ steam-totp pages dev/
+Redirected
+Bots
+Report finished: Jul 29, 2026, 17.06.29
+Public
+Security
+Summary
+Security
+Network
+Links
+Behavior
+Agent Readiness
+New
+Content
+Indicators
+Related
+Connectivity
+Routing
+Risks
+1 found
+DNS
+Practices that may pose security risks
+Tools
+Phishing
+Data Explorer
+URL Scanner
+Network Quality Test
+Security violations
+0 found
+Jl
+Reports
+Requests or resources
+offending security policies
+4P
+API
+None found
+Resources
+Certificates
+1 found
+Collapse sidebar
+SSLITLS Certificates enable websites to encrypt transactions between the client and the server and provide server identity
+verification
+Subject
+Issue date
+Expiry date
+steam-totp-pagesdev
+Jul 28, 2026, 17.06.38
+Jul
+2027, 17.06.38
+2026 Cloudflare; Inc:
+Privacy Policy
+Terms of Use
+Disclosure
+Trust & Safety
+Trademark
+Support
+29,
+
+----- cloudflare_summary.png -----
+Cloudflare Radar
+Search for locations; autonomous systems; reports; domains and more
+English
+Overview
+https:/ Isteam-totp-pages dev/
+Download
+4
+Traffic
+Scan ID: 0458f3c4-55f6-4ecd-93ec-91234bc141df0
+Finished
+Submitted URL: http://steam-totp pages dev/
+Redirec eo
+0
+Bots
+Report finished: Jul 29, 2026, 17.06.29
+Public
+Security
+Summary
+Security
+Network
+Links
+Behavior
+Agent Readiness
+Nex
+Content
+Indicators
+Related
+Connectivity
+Routing
+Summary
+53
+DNS
+title
+Security Verdict
+Suspected
+Phishing
+| Cloudflare
+X Malicicus
+Tools
+Domain
+Security violations
+Data Explorer
+steam-totp pages dev
+None found
+URL Scanner
+CIPA Filter
+Phishing
+Certificates
+Network Quality Test
+Report Miscategorization
+Found
+View live domain categorization 7
+Reports
+Rank
+API
+2200000 domains
+Redirect
+Resources
+307
+>
+403
+SuspcctedPnzhing
+Collapse sidebar
+This website contacted 2 IP addresses in 1
+country across 2 domains to make 5 HTTP requests The main IP is
+172.66.44.238, located in the United States and belongs to CLOUDFLARENET: The main domain is steam-totp-pagesdev:
+Statistics
+Requests
+Domains
+Bytes transferred
+Bytes total
+5
+2
+33 kB
+111 kB
+Documents
+Scripts
+StyleSheets
+Images
+2
+2
+1
+1
+Fonts
+Cookies
+ASNs
+Links
+1
+2
+Technologies
+3 identified
+Name
+Description
+Categories
+Cloudflare is a web-infrastructure and website-security company, providing
+Cloudflare
+content-delivery-network services, DDoS mitigation; Internet security, and
+CDN
+distributed domain-name-server services_
+HTTP Strict Transport Security (HSTS) informs browsers that the site should only
+HSTS
+Securty
+be accessed using HTTPS.
+HTTP/3 is the third major version of the Hypertext Transfer Protocol used to
+HTTP/3
+Miscellaneous
+exchange information on the World Wide Web:
+2026 Cloudflare, Inc:
+Privacy Policy
+Terms of Use
+Disclosure
+Trust & Safety
+Trademark
+Support
+Page
+Top
+
+================================================================================
+IPQS
+================================================================================
+
+----- ipqs_result.png -----
+IPOS
+URL Scanner
+Malicious URL Scanner
+Scan URLs for Malware & Phishing Links
+Scan any URL to detect malware, phishing, and suspicious behavior with real-time
+threat intelligence.
+Malicious URL Scanner API Docs
+Check URL for Malware or Suspicious Behavior
+example com or https (lexample com
+Check
+URL
+Status
+http:Ilsteam-totp pages devl
+Not Safe
+This URL is not safe due to phishing activity. We have detected that cloudflare is
+running on this server; with a hosted IP address at 188.114.96.3.
+Get a Free API
+Safe
+Warning
+NOT SAFE
+Overall URL risk classification.
+Suspicious
+Suspicious Activity
+Indicates reputation issues and potentially malicious activity:
+Domain
+steam-totp-pages dev
+Domain name of the final URL after all redirections.
+IP Address
+188.114.96.3
+CA
+The corresponding IP address for the URL's web server:
+Malware
+No Malware Issues
+Indicates if this domain has recently hosted malware, viruses, or C2 activity
+Phishing
+Phishing Link
+Risk Score
+95
+Risky
+Overall threat score from 0 (clean) to 100 (high risk) .
+Parked Domain
+I
+DeC
+Key
+Very
+
+================================================================================
+URLVOID
+================================================================================
+
+----- urlvoid_result.png -----
+N Domain Reputation API
+URLVOID
+WHOIS
+DNS
+PING
+SCREENSHOT
+PASSWORD
+BROWSER EXTENSION
+Enter website or URL here
+Scan Website
+SPONSORED: APIs for Threat Analysis
+Detection
+Prevent Malware
+Ransomware
+Harden Windows 11
+Discover more
+Networking
+Hacking
+Cracking
+Web Apps
+Online Tools
+Data Formats
+Protocols
+Software Utilities
+Computer Security
+Programming
+Report Summary
+Website Address
+Steam-totp pages dev
+First Seen
+month ago
+Last Analysis
+month ago
+€ Rescan
+Detections Counts
+Domain Registration
+2020-09-02
+6 years ago
+Domain Information
+WHOIS Lookup | DNS Records | Ping
+Address
+172.66.44.238
+Eind Websites
+FVoid
+Whois
+Reverse DNS
+Unknown
+ASN
+AS13335 Cloudflare; Inc
+Server Location
+Unknown
+Latitude | Longitude
+Unknown
+City
+Unknown
+Region
+Unknown
+Discover more
+Electronic Spam
+Identity Theft Protection
+Development Tools
+Antivirus
+Malware
+Email
+Messaging
+Network Security
+Scanning Engines
+Engine
+Result
+Details
+Avira
+Detected
+View More Details
+BitDefender
+Detected
+View More Details
+Fortinet
+Detected
+View More Details
+Gridinsoft
+Detected
+View More Details
+ThreatLog
+Detected
+'View More Details
+APVA
+Nothing Found
+View More Details
+Artists Against 419
+Nothing Found
+View More Details
+AZORult Tracker
+Nothing Found
+View More Details
+Badbitcoin
+Nothing Found
+View More Details
+Bambenek Consulting
+Nothing Found
+View More Details
+CERT Polska
+Nothing Found
+View More Details
+DrWeb
+Nothing Found
+View More Details
+Fake Website Buster
+Nothing Found
+View More Details
+OpenPhish
+Nothing Found
+View More Details
+PetScams
+Nothing Found
+View More Details
+PhishFort
+Nothing Found
+View More Details
+Phishing Database
+Nothing Found
+View More Details
+PhishingReel
+Nothing Found
+'View More Details
+PhishStats
+Nothing Found
+View More Details
+PhishTank
+Nothing Found
+View More Details
+Phishunt
+Nothing Found
+View More Details
+Scam Directory
+Nothing Found
+'View More Details
+SCUMWARE
+Nothing Found
+View More Details
+Seclookup
+Nothing Found
+View More Details
+SecureReload
+Phishing List
+Nothing Found
+View More Details
+Spam404
+Nothing Found
+'View More Details
+StopForumSpam
+Nothing Found
+View More Details
+SURBL
+Nothing Found
+View More Details
+Threat Sourcing
+Nothing Found
+View More Details
+TweetFeed
+Nothing Found
+View More Details
+urlDNA
+Nothing Found
+View More Details
+URLhaus
+Nothing Found
+View More Details
+urlQuery
+Nothing Found
+View More Details
+ViriBack Cz Tracker
+Nothing Found
+View More Details
+VXVault
+Nothing Found
+View More Details
+2010-2026 NoVirusThanks | All rights reserved
+Reputation Feeds | Open Multiple URLs | APIVoid
+Geolocation Database by IPzLocation
+Privacy Policy | Terms of Service

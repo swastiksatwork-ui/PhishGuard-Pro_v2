@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Threat Score — Real-Time Cyber Risk Index</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#020806;
+    --panel:#04120e;
+    --cyan:#33e6ff;
+    --cyan-dim:#0f8fa8;
+    --red:#ff3b3b;
+    --purple:#a26bff;
+    --green:#1fff8f;
+    --amber:#ffb020;
+    --line: rgba(51,230,255,.5);
+    --glass: rgba(2,9,8,.88);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);}
+  html{overflow-y:auto; height:auto;}
+  body{
+    font-family:'Share Tech Mono', monospace;
+    color:var(--cyan);
+    min-height:100vh;
+    height:auto;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:24px;
+    position:relative;
+    overflow-x:hidden;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  canvas#rain{
+    position:fixed; inset:0; width:100%; height:100%;
+    z-index:0; opacity:.55;
+    pointer-events:none;
+  }
+  #hudLines{
+    position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.05;
+    background-image:
+      repeating-linear-gradient(0deg, var(--cyan) 0 1px, transparent 1px 80px),
+      repeating-linear-gradient(90deg, var(--cyan) 0 1px, transparent 1px 80px),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='52' viewBox='0 0 60 52'><polygon points='15,1 45,1 59,26 45,51 15,51 1,26' fill='none' stroke='%2333e6ff' stroke-width='1'/></svg>");
+    background-size:80px 80px, 80px 80px, 60px 52px;
+  }
+  .board{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:1320px;
+    background: transparent;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:28px 30px 34px;
+    box-shadow:0 0 60px rgba(51,230,255,.08), inset 0 0 80px rgba(0,0,0,.25);
+  }
+
+  .framed{ position:relative; box-shadow:0 0 0 1px rgba(51,230,255,.15), 0 0 18px rgba(51,230,255,.07); }
+  .corner-accent{
+    position:absolute; width:13px; height:13px;
+    pointer-events:none;
+    opacity:.9;
+    filter:drop-shadow(0 0 3px var(--cyan));
+  }
+  .corner-accent.tl{ top:-1px; left:-1px; border-top:2px solid var(--cyan); border-left:2px solid var(--cyan); border-top-left-radius:3px; }
+  .corner-accent.tr{ top:-1px; right:-1px; border-top:2px solid var(--cyan); border-right:2px solid var(--cyan); border-top-right-radius:3px; }
+  .corner-accent.bl{ bottom:-1px; left:-1px; border-bottom:2px solid var(--cyan); border-left:2px solid var(--cyan); border-bottom-left-radius:3px; }
+  .corner-accent.br{ bottom:-1px; right:-1px; border-bottom:2px solid var(--cyan); border-right:2px solid var(--cyan); border-bottom-right-radius:3px; }
+  .header{
+    display:flex; flex-direction:column; align-items:center; margin-bottom:26px;
+  }
+  .title-row{
+    display:flex; align-items:center; justify-content:center; gap:4px; width:100%;
+  }
+  .accent{width:110px; height:20px; flex:none; filter:drop-shadow(0 0 4px var(--cyan));}
+  @media (max-width:760px){ .accent{display:none;} }
+
+  .corner{position:absolute; width:22px; height:22px; border:2px solid var(--cyan); opacity:.55; pointer-events:none;}
+  .corner.tl{top:-2px; left:-2px; border-right:none; border-bottom:none;}
+  .corner.tr{top:-2px; right:-2px; border-left:none; border-bottom:none;}
+  .corner.bl{bottom:-2px; left:-2px; border-right:none; border-top:none;}
+  .corner.br{bottom:-2px; right:-2px; border-left:none; border-top:none;}
+
+  .glow-pool{
+    position:absolute; left:50%; bottom:-30px; transform:translateX(-50%);
+    width:360px; height:70px;
+    background:radial-gradient(ellipse at center, rgba(51,230,255,.4), transparent 72%);
+    filter:blur(4px);
+    pointer-events:none;
+    animation:poolPulse 3s ease-in-out infinite;
+  }
+  @keyframes poolPulse{0%,100%{opacity:.6;}50%{opacity:1;}}
+  .hex-title{
+    position:relative;
+    padding:14px 60px;
+    clip-path:polygon(4% 0,96% 0,100% 50%,96% 100%,4% 100%,0 50%);
+    border:1px solid var(--cyan);
+    background: transparent;
+    text-align:center;
+  }
+  .hex-title h1{
+    margin:0;
+    font-family:'Orbitron',sans-serif;
+    font-weight:900;
+    font-size:34px;
+    letter-spacing:6px;
+    color:#eafeff;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 12px var(--cyan),
+      0 0 26px var(--cyan),
+      0 0 46px rgba(51,230,255,.85),
+      0 0 80px rgba(51,230,255,.55),
+      0 0 120px rgba(51,230,255,.35);
+    animation:titleFlicker 3.2s ease-in-out infinite;
+  }
+  @keyframes titleFlicker{
+    0%,19%,21%,54%,56%,100%{
+      text-shadow:
+        0 0 4px #fff,
+        0 0 12px var(--cyan),
+        0 0 26px var(--cyan),
+        0 0 46px rgba(51,230,255,.85),
+        0 0 80px rgba(51,230,255,.55),
+        0 0 120px rgba(51,230,255,.35);
+    }
+    20%,55%{
+      text-shadow:
+        0 0 2px #fff,
+        0 0 6px var(--cyan),
+        0 0 14px rgba(51,230,255,.6);
+    }
+  }
+  .hex-title p{
+    margin:6px 0 0;
+    letter-spacing:5px;
+    font-size:12px;
+    color:var(--cyan-dim);
+  }
+
+  /* ===== Main grid ===== */
+  .main{
+    display:grid;
+    grid-template-columns:220px 1fr 220px;
+    gap:18px;
+    align-items:stretch;
+    margin-bottom:20px;
+  }
+  .side-card{
+    background:var(--glass);
+    border:1px solid var(--line);
+    border-radius:10px;
+    clip-path:polygon(0 12px,12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%);
+    padding:20px 16px;
+    text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .side-card .icon{width:34px;height:34px;margin-bottom:2px;filter:drop-shadow(0 0 6px currentColor);}
+  .side-card .label{font-size:11px; letter-spacing:2px; color:var(--cyan-dim);}
+  .risk-level{
+    font-family:'Orbitron',sans-serif; font-weight:900; font-size:30px;
+    color:var(--red);
+    animation: riskGlow 2.4s ease-in-out infinite;
+  }
+  @keyframes riskGlow{
+    0%,100%{ text-shadow:0 0 10px currentColor; }
+    50%{ text-shadow:0 0 24px currentColor, 0 0 8px currentColor; }
+  }
+  .risk-sub{font-size:11px; color:#9fd8e0; letter-spacing:1px;}
+  .warn-icon{
+    width:46px;height:46px;
+    filter:drop-shadow(0 0 10px var(--red));
+    animation:pulseWarn 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseWarn{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+  .confidence-num{
+    font-family:'Orbitron',sans-serif; font-weight:900; font-size:32px;
+    color:var(--cyan); text-shadow:0 0 14px var(--cyan);
+  }
+  .spark{width:100%; height:46px;}
+  .spark path{fill:none; stroke:var(--cyan); stroke-width:1.6; transition:stroke-width .2s, filter .2s;}
+  .spark.pulse path{
+    stroke-width:3;
+    filter:drop-shadow(0 0 6px var(--cyan));
+    transition:stroke-width .15s ease-out, filter .15s ease-out;
+  }
+
+  /* ===== Gauge ===== */
+  .gauge-wrap{
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+    position:relative;
+  }
+  .gauge-labels{
+    display:flex; justify-content:space-between; width:100%; padding:0 4%;
+    font-size:12px; letter-spacing:2px; color:var(--cyan-dim); margin-bottom:2px;
+  }
+  .gauge-labels b{display:block; font-family:'Orbitron',sans-serif; font-size:16px; color:#dffbff;}
+  .risk-mark{ display:block; margin:5px auto 0; opacity:.9; }
+  .risk-mark.dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--cyan); box-shadow:0 0 6px var(--cyan), 0 0 12px var(--cyan);
+    animation:dotBlink 2.4s ease-in-out infinite;
+  }
+  .gauge-labels div:first-child .risk-mark.dot{ margin-left:0; }
+  .gauge-labels div:last-child .risk-mark.dot{ margin-right:0; margin-left:auto; }
+  .risk-mark.tri{
+    width:0; height:0;
+    border-left:5px solid transparent; border-right:5px solid transparent;
+    border-top:7px solid var(--cyan);
+    filter:drop-shadow(0 0 4px var(--cyan));
+    animation:dotBlink 2.4s ease-in-out infinite;
+  }
+  .gauge-svg{width:100%; max-width:480px; height:auto;}
+  .needle{
+    transform-origin:250px 250px;
+    filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 14px var(--cyan)) drop-shadow(0 0 28px rgba(51,230,255,.6));
+  }
+  #ticks line{opacity:.3; transform-origin:250px 250px;}
+  @keyframes tickScan{0%,100%{opacity:.25;}50%{opacity:1;}}
+  .ring1{transform-origin:250px 250px; animation:spinCW 20s linear infinite;}
+  .ring2{transform-origin:250px 250px; animation:spinCCW 26s linear infinite;}
+  @keyframes spinCW{to{transform:rotate(360deg);}}
+  @keyframes spinCCW{to{transform:rotate(-360deg);}}
+  .hexdot{animation:dotBlink 3s ease-in-out infinite;}
+  @keyframes dotBlink{0%,100%{opacity:.2;}50%{opacity:.7;}}
+  #arcEnergy{
+    stroke-dasharray:30 630;
+    stroke-dashoffset:660;
+    opacity:0;
+    filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 14px var(--cyan));
+    animation:arcTravel 4s linear infinite;
+  }
+  @keyframes arcTravel{
+    0%{stroke-dashoffset:660; opacity:0;}
+    6%{opacity:.75;}
+    88%{opacity:.75;}
+    100%{stroke-dashoffset:0; opacity:0;}
+  }
+  .score-center{
+    position:absolute; top:56%; left:50%; transform:translate(-50%,-50%);
+    text-align:center;
+  }
+  .score-num{
+    font-family:'Orbitron',sans-serif; font-weight:900; font-size:76px; line-height:1;
+    color:#eafeff;
+    text-shadow:
+      0 0 8px var(--cyan),
+      0 0 18px var(--cyan),
+      0 0 35px var(--cyan),
+      0 0 60px rgba(51,230,255,.5);
+    animation:numberGlow 2.6s ease-in-out infinite;
+  }
+  @keyframes numberGlow{
+    0%,100%{
+      text-shadow:0 0 8px var(--cyan), 0 0 18px var(--cyan), 0 0 35px var(--cyan), 0 0 60px rgba(51,230,255,.5);
+    }
+    50%{
+      text-shadow:0 0 10px var(--cyan), 0 0 26px var(--cyan), 0 0 50px var(--cyan), 0 0 80px rgba(51,230,255,.65);
+    }
+  }
+  .score-den{font-size:16px; color:var(--cyan-dim); letter-spacing:2px; margin-top:2px;}
+  .score-caption{font-size:11px; letter-spacing:3px; color:var(--cyan-dim); margin-top:4px;}
+  .end-labels{
+    display:flex; justify-content:space-between; width:100%; max-width:480px;
+    font-size:11px; color:var(--cyan-dim); margin-top:2px; letter-spacing:1px;
+  }
+  .end-labels .lo{color:var(--red);}
+  .end-labels .hi{color:var(--cyan);}
+  .tick-label{position:absolute; font-size:11px; letter-spacing:1px;}
+  .tl-lo{left:5%; top:36%; color:#ff8b8b;}
+  .tl-hi{right:5%; top:36%; color:var(--cyan);}
+
+  /* ===== Legend strip ===== */
+  .legend{
+    display:flex; justify-content:space-between; align-items:center;
+    background:var(--glass); border:1px solid var(--line); border-radius:10px;
+    padding:14px 20px; margin-bottom:18px; flex-wrap:wrap; gap:10px;
+  }
+  .legend .item{display:flex; align-items:center; gap:8px; font-size:11px; letter-spacing:1px;}
+  .legend .item:not(:first-child){ border-left:1px solid rgba(51,230,255,.3); padding-left:16px; }
+  .legend .item span.range{display:block; font-weight:700;}
+  .legend .item.crit .range{color:var(--red);}
+  .legend .item.sev .range{color:#ff6b3b;}
+  .legend .item.elev .range{color:var(--amber);}
+  .legend .item.guard .range{color:var(--purple);}
+  .legend .item.high .range{color:var(--cyan);}
+  .legend .item.trust .range{color:var(--cyan);}
+  .legend svg{width:20px;height:20px;flex:none;}
+
+  /* ===== Bottom cards ===== */
+  .bottom{display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px;}
+  .bcard{
+    background:var(--glass); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; display:flex; align-items:center; gap:16px;
+  }
+  .bcard .bicon{width:42px;height:42px;flex:none; filter:drop-shadow(0 0 6px currentColor);}
+  .bcard h3{margin:0 0 6px; font-size:12px; letter-spacing:2px; font-weight:400;}
+  .bcard .bnum{font-family:'Orbitron',sans-serif; font-weight:900; font-size:26px; color:#eafeff;}
+  .bcard .bnum small{font-size:14px; color:var(--cyan-dim); font-family:'Share Tech Mono',monospace;}
+  .bcard .bsub{font-size:10.5px; color:var(--cyan-dim); margin-top:4px; letter-spacing:1px;}
+  .bcard.objective h3, .bcard.objective .bnum{color:var(--cyan);}
+  .bcard.subjective h3, .bcard.subjective .bnum{color:var(--purple);}
+  .bcard.breakdown h3, .bcard.breakdown .bnum{color:var(--cyan);}
+
+  @media (max-width:880px){
+    .main{grid-template-columns:1fr;}
+    .bottom{grid-template-columns:1fr;}
+  }
+
+  /* ===== Footer status bar ===== */
+  .footer-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top:18px; padding-top:14px;
+    border-top:1px solid rgba(51,230,255,.18);
+    font-size:10.5px; letter-spacing:2px; color:var(--cyan-dim);
+    flex-wrap:wrap; gap:10px;
+  }
+  .footer-item{ display:flex; align-items:center; gap:7px; }
+  .footer-item.mono{ font-family:'Share Tech Mono', monospace; }
+  .footer-item .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 6px var(--green), 0 0 12px var(--green);
+    animation:dotBlink 1.8s ease-in-out infinite;
+    flex:none;
+  }
+  @media (max-width:600px){
+    .footer-bar{ justify-content:center; text-align:center; }
+  }
+  .nav-arrow{
+    position:fixed;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:50;
+    width:56px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(2,9,8,.7);
+    border:1px solid var(--line);
+    border-radius:50%;
+    color:var(--cyan);
+    text-decoration:none;
+    filter:drop-shadow(0 0 6px rgba(51,230,255,.6));
+    transition:.25s;
+  }
+  .nav-arrow:hover{
+    background:rgba(51,230,255,.12);
+    filter:drop-shadow(0 0 14px rgba(51,230,255,.9));
+    transform:translateY(-50%) scale(1.08);
+  }
+  .nav-arrow svg{
+    width:26px;
+    height:26px;
+  }
+  .nav-arrow.left{ left:18px; }
+  .nav-arrow.right{ right:18px; }
+</style>
+</head>
+<body>
+
+<a href="/dashboard" class="nav-arrow left" title="Previous">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</a>
+
+<a href="/theatrics" class="nav-arrow right" title="Next">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+</a>
+
+<div id="hudLines"></div>
+<canvas id="rain"></canvas>
+
+<div class="board">
+  <span class="corner tl"></span>
+  <span class="corner tr"></span>
+  <span class="corner bl"></span>
+  <span class="corner br"></span>
+
+
+  <div class="header">
+    <div class="title-row">
+      <svg class="accent left" viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="10" x2="88" y2="10" stroke="var(--cyan)" stroke-width="1.5"/>
+        <path d="M88 3 L100 10 L88 17" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="114" cy="10" r="3" fill="var(--cyan)"/>
+      </svg>
+      <div class="hex-title">
+        <h1>THREAT SCORE</h1>
+        <p>REAL-TIME CYBER RISK INDEX</p>
+      </div>
+      <svg class="accent right" viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg">
+        <line x1="32" y1="10" x2="120" y2="10" stroke="var(--cyan)" stroke-width="1.5"/>
+        <path d="M32 3 L20 10 L32 17" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="6" cy="10" r="3" fill="var(--cyan)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- LEFT -->
+    <div class="side-card framed">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      <div class="label">RISK LEVEL</div>
+      <div class="risk-level" id="riskLevel">HIGH</div>
+      <div class="risk-sub">Elevated Threat<br>Detected</div>
+      <svg class="warn-icon" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8">
+        <path d="M12 3l10 18H2z" stroke-linejoin="round" stroke-linecap="round"/>
+        <line x1="12" y1="9.5" x2="12" y2="14.5"/>
+        <circle cx="12" cy="17.3" r="0.9" fill="var(--red)" stroke="none"/>
+      </svg>
+    </div>
+
+    <!-- GAUGE -->
+    <div class="gauge-wrap">
+      <div class="gauge-labels">
+        <div style="text-align:left"><span>HIGH RISK</span><b>21</b><i class="risk-mark dot"></i></div>
+        <div style="text-align:center"><span>MODERATE RISK</span><b>41</b><i class="risk-mark tri"></i></div>
+        <div style="text-align:right"><span>LOW RISK</span><b>61</b><i class="risk-mark dot"></i></div>
+      </div>
+
+      <div style="position:relative; width:100%; display:flex; justify-content:center;">
+        <div class="tick-label tl-lo">-10</div>
+        <div class="tick-label tl-hi">+60</div>
+        <svg class="gauge-svg" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff2b2b"/>
+              <stop offset="35%" stop-color="#c23bd8"/>
+              <stop offset="55%" stop-color="#7a4bff"/>
+              <stop offset="75%" stop-color="#3f8bff"/>
+              <stop offset="100%" stop-color="#33e6ff"/>
+            </linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="bloom" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="b1"/>
+              <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="b2"/>
+              <feGaussianBlur in="SourceGraphic" stdDeviation="45" result="b3"/>
+              <feMerge>
+                <feMergeNode in="b3"/>
+                <feMergeNode in="b2"/>
+                <feMergeNode in="b1"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- track -->
+          <path d="M 40 250 A 210 210 0 0 1 460 250" fill="none" stroke="#0a2a26" stroke-width="26" stroke-linecap="round"/>
+          <!-- extra bloom layer, underneath the sharp arc -->
+          <path id="arcGlow" d="M 40 250 A 210 210 0 0 1 460 250" fill="none" stroke="url(#arcGrad)" stroke-width="20" stroke-linecap="round" filter="url(#bloom)" opacity="0.55"
+                stroke-dasharray="660" stroke-dashoffset="660"/>
+          <!-- gradient arc -->
+          <path id="arcPath" d="M 40 250 A 210 210 0 0 1 460 250" fill="none" stroke="url(#arcGrad)" stroke-width="20" stroke-linecap="round" filter="url(#glow)"
+                stroke-dasharray="660" stroke-dashoffset="660"/>
+          <!-- travelling energy pulse -->
+          <path id="arcEnergy" d="M 40 250 A 210 210 0 0 1 460 250" fill="none" stroke="#eafeff" stroke-width="4" stroke-linecap="round"/>
+          <!-- dial decoration: rings + hex dots, very low opacity -->
+          <g id="dialDecor" opacity="0.16">
+            <circle class="ring1" cx="250" cy="250" r="145" fill="none" stroke="var(--cyan)" stroke-width="1" stroke-dasharray="3 7"/>
+            <circle class="ring2" cx="250" cy="250" r="115" fill="none" stroke="var(--cyan)" stroke-width="1" stroke-dasharray="1.5 9"/>
+            <circle class="hexdot" cx="250" cy="105" r="2.2" fill="var(--cyan)" style="animation-delay:0s"/>
+            <circle class="hexdot" cx="357" cy="163" r="2.2" fill="var(--cyan)" style="animation-delay:.5s"/>
+            <circle class="hexdot" cx="357" cy="277" r="2.2" fill="var(--cyan)" style="animation-delay:1s"/>
+            <circle class="hexdot" cx="143" cy="163" r="2.2" fill="var(--cyan)" style="animation-delay:1.5s"/>
+            <circle class="hexdot" cx="143" cy="277" r="2.2" fill="var(--cyan)" style="animation-delay:2s"/>
+          </g>
+          <!-- tick marks -->
+          <g id="ticks" stroke="#0d3a35" stroke-width="2"></g>
+          <!-- needle -->
+          <g class="needle" id="needle">
+            <line x1="250" y1="250" x2="250" y2="70" stroke="#eafeff" stroke-width="4"/>
+            <circle cx="250" cy="250" r="12" fill="#eafeff" filter="url(#glow)"/>
+          </g>
+        </svg>
+        <div class="score-center">
+          <div class="score-num" id="scoreNum">0</div>
+          <div class="score-den">/100</div>
+          <div class="score-caption">OVERALL THREAT SCORE</div>
+        </div>
+      </div>
+      <div class="end-labels">
+        <span class="lo">MAX RISK&nbsp; -30</span>
+        <span class="hi">MAX TRUST&nbsp; 100</span>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="side-card framed">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg>
+      <div class="label">CONFIDENCE</div>
+      <div class="confidence-num" id="confNum">0%</div>
+      <div class="risk-sub">High Confidence</div>
+      <svg class="spark" viewBox="0 0 160 46" preserveAspectRatio="none">
+        <path id="sparkPath" d="M0,30 L160,30"/>
+      </svg>
+      <div class="risk-sub" style="letter-spacing:1px;">ANALYSIS RELIABILITY<br><b style="color:var(--cyan)">STRONG</b></div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend framed">
+    <div class="item crit"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.6"><circle cx="12" cy="9" r="6"/><path d="M9 21l3-4 3 4"/></svg><div><span class="range" id="range-critical">-30 to 0</span>CRITICAL</div></div>
+    <div class="item sev"><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b3b" stroke-width="1.6"><path d="M12 2l10 18H2z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r=".6" fill="#ff6b3b"/></svg><div><span class="range" id="range-severe">1 to 20</span>SEVERE</div></div>
+    <div class="item elev"><svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.6"><path d="M12 2l10 18H2z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r=".6" fill="var(--amber)"/></svg><div><span class="range" id="range-elevated">21 to 40</span>ELEVATED</div></div>
+    <div class="item guard"><svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.6"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/></svg><div><span class="range" id="range-guarded">41 to 60</span>GUARDED</div></div>
+    <div class="item high"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.6"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M9 12l2 2 4-4"/></svg><div><span class="range" id="range-high">61 to 80</span>HIGH</div></div>
+    <div class="item trust"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><div><span class="range" id="range-trusted">81 to 100</span>TRUSTED</div></div>
+  </div>
+
+  <!-- BOTTOM CARDS -->
+  <div class="bottom">
+    <div class="bcard objective framed">
+      <svg class="bicon" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8" fill="var(--cyan)"/></svg>
+      <div>
+        <h3>OBJECTIVE SCORE</h3>
+        <div class="bnum" id="objNum">0<small>/37</small></div>
+        <div class="bsub">EVIDENCE BASED<br>FROM DATASET</div>
+      </div>
+    </div>
+    <div class="bcard subjective framed">
+      <svg class="bicon" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.5"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.4c.6.6 1 1.3 1 2.1h6c0-.8.4-1.5 1-2.1A6 6 0 0 0 12 3z"/></svg>
+      <div>
+        <h3>SUBJECTIVE SCORE</h3>
+        <div class="bnum" id="subNum">+0<small>/63</small></div>
+        <div class="bsub">AI ASSESSMENT<br>CONTEXTUAL ANALYSIS</div>
+      </div>
+    </div>
+    <div class="bcard breakdown framed">
+      <svg class="bicon" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.4">
+        <line x1="12" y1="12" x2="12" y2="4"/><line x1="12" y1="12" x2="19" y2="8"/><line x1="12" y1="12" x2="19" y2="16"/>
+        <line x1="12" y1="12" x2="12" y2="20"/><line x1="12" y1="12" x2="5" y2="16"/><line x1="12" y1="12" x2="5" y2="8"/>
+        <circle cx="12" cy="12" r="1.8" fill="var(--cyan)" stroke="none"/>
+        <circle cx="12" cy="4" r="1.6" fill="var(--cyan)" stroke="none"/>
+        <circle cx="19" cy="8" r="1.6" fill="var(--cyan)" stroke="none"/>
+        <circle cx="19" cy="16" r="1.6" fill="var(--cyan)" stroke="none"/>
+        <circle cx="12" cy="20" r="1.6" fill="var(--cyan)" stroke="none"/>
+        <circle cx="5" cy="16" r="1.6" fill="var(--cyan)" stroke="none"/>
+        <circle cx="5" cy="8" r="1.6" fill="var(--cyan)" stroke="none"/>
+      </svg>
+      <div>
+        <h3>SCORE BREAKDOWN</h3>
+        <div class="bnum" id="breakNum">0 + 0</div>
+        <div class="bsub">OBJECTIVE + SUBJECTIVE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-item">
+      <span class="dot"></span> SYSTEM ONLINE
+    </div>
+    <div class="footer-item mono" id="footerTime">LAST SCAN — --:--:--</div>
+    <div class="footer-item">THREATNET ENGINE&nbsp;v4.2</div>
+  </div>
+
+  <div class="glow-pool"></div>
+
+</div>
+
+<script>
+/* ============================================================
+   DEFAULT CONFIG — used only as a fallback if threat_score.json
+   can't be loaded (e.g. file opened directly with no local server).
+   Do not edit these values to update the dashboard day-to-day —
+   edit threat_score.json instead. See the "DYNAMIC DATA LOADER"
+   section near the bottom of this script.
+   ============================================================ */
+const CONFIG = {
+  score: 78,          // overall threat score, -30 to 100
+  min: -30,
+  max: 100,
+  confidence: 92,
+  objective: 34, objectiveMax: 37,
+  subjective: 44, subjectiveMax: 63,
+  riskLabel: '',       // if empty, risk level is derived from score
+  sparkline: [4,7,5,9,6,11,8,13,10,15,12,16,14,18]
+};
+
+/* ============ Matrix rain background ============ */
+const canvas = document.getElementById('rain');
+const ctx = canvas.getContext('2d');
+let W,H,cols,drops;
+const glyphs = "01アイウエオカキクケコ日誅威胁監視";
+function sizeCanvas(){
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  cols = Math.floor(W/16);
+  drops = new Array(cols).fill(0).map(()=>Math.random()*-50);
+}
+sizeCanvas();
+window.addEventListener('resize', sizeCanvas);
+function drawRain(){
+  ctx.fillStyle = 'rgba(1,8,6,0.13)';
+  ctx.fillRect(0,0,W,H);
+  ctx.font = '14px monospace';
+  for(let i=0;i<cols;i++){
+    // only ~15% of columns advance/redraw each frame — keeps it from feeling busy
+    if(Math.random() > 0.15) continue;
+    const ch = glyphs[Math.floor(Math.random()*glyphs.length)];
+    ctx.fillStyle = Math.random()>0.95 ? '#eafeff' : 'rgba(31,255,143,0.55)';
+    ctx.fillText(ch, i*16, drops[i]*16);
+    if(drops[i]*16 > H && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+  requestAnimationFrame(drawRain);
+}
+drawRain();
+
+/* ============ Gauge ticks ============ */
+const ticksG = document.getElementById('ticks');
+const cx=250, cy=250, rOuter=210;
+for(let i=0;i<=40;i++){
+  const a = Math.PI - (i/40)*Math.PI;
+  const r1 = rOuter+18, r2 = rOuter + (i%5===0?28:23);
+  const x1 = cx + r1*Math.cos(a), y1 = cy - r1*Math.sin(a);
+  const x2 = cx + r2*Math.cos(a), y2 = cy - r2*Math.sin(a);
+  const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('x1',x1); line.setAttribute('y1',y1);
+  line.setAttribute('x2',x2); line.setAttribute('y2',y2);
+  line.style.animation = 'tickScan 2.4s ease-in-out infinite';
+  line.style.animationDelay = `${(i/40)*1.2}s`;
+  ticksG.appendChild(line);
+}
+
+/* ============ Animate needle + arc + counters ============ */
+function valueToAngle(v){
+  const pct = (v - CONFIG.min) / (CONFIG.max - CONFIG.min);
+  return 180 * pct; // 0 = far left(-30), 180 = far right(100)
+}
+function animateNumber(el, target, opts={}){
+  const {duration=1600, prefix='', suffix='', decimals=0} = opts;
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min(1,(now-start)/duration);
+    const eased = 1 - Math.pow(1-t,3);
+    const val = target*eased;
+    el.textContent = prefix + val.toFixed(decimals) + suffix;
+    if(t<1) requestAnimationFrame(tick);
+    else el.textContent = prefix + target.toFixed(decimals) + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
+function renderDashboard(){
+  // needle — spring/overshoot animation, like a real aircraft gauge settling
+  const angle = valueToAngle(CONFIG.score);
+  const needle = document.getElementById('needle');
+  const overshoot = Math.min(180, angle + 9);   // swing past target
+  const settle = Math.max(0, angle - 4);        // bounce back short
+  needle.animate([
+    { transform: `rotate(-90deg)` },
+    { transform: `rotate(${overshoot-90}deg)`, offset:0.62 },
+    { transform: `rotate(${settle-90}deg)`, offset:0.82 },
+    { transform: `rotate(${angle-90}deg)`, offset:1 }
+  ], { duration:1900, easing:'cubic-bezier(.22,.85,.3,1)', fill:'forwards' });
+
+  // arc fill (sharp layer + underlying bloom layer, kept in sync)
+  const arc = document.getElementById('arcPath');
+  const arcGlow = document.getElementById('arcGlow');
+  const totalLen = 660;
+  const pct = (CONFIG.score - CONFIG.min)/(CONFIG.max-CONFIG.min);
+  const finalOffset = totalLen - totalLen*pct;
+  [arc, arcGlow].forEach(p=>{
+    p.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(.2,.9,.25,1)';
+  });
+  requestAnimationFrame(()=>{
+    arc.style.strokeDashoffset = finalOffset;
+    arcGlow.style.strokeDashoffset = finalOffset;
+  });
+
+  // counters
+  animateNumber(document.getElementById('scoreNum'), CONFIG.score, {duration:1800});
+  animateNumber(document.getElementById('confNum'), CONFIG.confidence, {duration:1600, suffix:'%'});
+  animateNumber(document.getElementById('objNum'), CONFIG.objective, {duration:1400});
+  document.getElementById('objNum').innerHTML = `${CONFIG.objective}<small>/${CONFIG.objectiveMax}</small>`;
+  document.getElementById('subNum').innerHTML = `+${CONFIG.subjective}<small>/${CONFIG.subjectiveMax}</small>`;
+  document.getElementById('breakNum').textContent = `${CONFIG.objective} + ${CONFIG.subjective}`;
+
+  // risk level label — uses CONFIG.riskLabel from JSON if provided, otherwise derives from score
+  const rl = document.getElementById('riskLevel');
+  const s = CONFIG.score;
+  let label='CRITICAL', color='var(--red)';
+  if(s>80){label='TRUSTED';color='var(--green)';}
+  else if(s>60){label='HIGH';color='var(--cyan)';}
+  else if(s>40){label='GUARDED';color='var(--purple)';}
+  else if(s>20){label='ELEVATED';color='var(--amber)';}
+  else if(s>0){label='SEVERE';color='#ff6b3b';}
+  if(CONFIG.riskLabel){ label = CONFIG.riskLabel.toUpperCase(); }
+  rl.textContent = label;
+  rl.style.color = color;
+
+  // gauge legend ranges — dynamic from CONFIG.gauge if provided
+  if(CONFIG.gauge){
+    const g = CONFIG.gauge;
+    const setRange = (id, band) => {
+      if(!band) return;
+      const el = document.getElementById(id);
+      if(el) el.textContent = `${band.min} to ${band.max}`;
+    };
+    setRange('range-critical', g.critical);
+    setRange('range-severe', g.severe);
+    setRange('range-elevated', g.elevated);
+    setRange('range-guarded', g.guarded);
+    setRange('range-high', g.high);
+    setRange('range-trusted', g.trusted);
+  }
+
+  // sparkline
+  const data = CONFIG.sparkline;
+  const w=160,h=46,pad=4;
+  const maxV=Math.max(...data), minV=Math.min(...data);
+  const pts = data.map((v,i)=>{
+    const x = pad + (i/(data.length-1))*(w-pad*2);
+    const y = h-pad - ((v-minV)/(maxV-minV||1))*(h-pad*2);
+    return [x,y];
+  });
+  let d = `M${pts[0][0]},${pts[0][1]}`;
+  pts.slice(1).forEach(p=> d+= ` L${p[0]},${p[1]}`);
+  const sp = document.getElementById('sparkPath');
+  sp.setAttribute('d', d);
+  const len = sp.getTotalLength();
+  sp.style.strokeDasharray = len;
+  sp.style.strokeDashoffset = len;
+  sp.style.transition = 'stroke-dashoffset 1.6s ease-out 0.4s';
+  requestAnimationFrame(()=> sp.style.strokeDashoffset = 0);
+
+  // dots at each data point (clear any from a previous render before re-adding)
+  const sparkSvg = sp.closest('svg');
+  sparkSvg.querySelectorAll('circle.spark-dot').forEach(c=>c.remove());
+  pts.forEach((p,i)=>{
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('class','spark-dot');
+    dot.setAttribute('cx', p[0]);
+    dot.setAttribute('cy', p[1]);
+    dot.setAttribute('r', 1.8);
+    dot.setAttribute('fill', 'var(--cyan)');
+    dot.style.opacity = '0';
+    dot.style.transition = `opacity .3s ease-out ${0.5 + i*0.08}s`;
+    sparkSvg.appendChild(dot);
+    requestAnimationFrame(()=> dot.style.opacity = '1');
+  });
+
+  // ECG-style pulse on the confidence sparkline, every 2s (only wire this once)
+  if(!renderDashboard._pulseStarted){
+    renderDashboard._pulseStarted = true;
+    const sparkEl = document.querySelector('.spark');
+    setInterval(()=>{
+      sparkEl.classList.add('pulse');
+      setTimeout(()=> sparkEl.classList.remove('pulse'), 450);
+    }, 2000);
+  }
+
+  // footer: live scan timestamp, ticking every second (only wire this once)
+  if(!renderDashboard._clockStarted){
+    renderDashboard._clockStarted = true;
+    const footerTime = document.getElementById('footerTime');
+    function updateFooterTime(){
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2,'0');
+      const mm = String(now.getMinutes()).padStart(2,'0');
+      const ss = String(now.getSeconds()).padStart(2,'0');
+      footerTime.textContent = `LAST SCAN — ${hh}:${mm}:${ss}`;
+    }
+    updateFooterTime();
+    setInterval(updateFooterTime, 1000);
+  }
+}
+
+/* ============================================================
+   DYNAMIC DATA LOADER
+   ------------------------------------------------------------
+   Fetches threat_score.json (same folder as this HTML file)
+   every time the page loads, maps its fields onto CONFIG, then
+   renders the dashboard from that data. If the fetch fails
+   (e.g. the file is opened directly as file:// instead of being
+   served by a local/web server, so the browser blocks it) the
+   dashboard falls back to the DEFAULT CONFIG above so the page
+   never breaks.
+
+   To update the numbers day-to-day: edit threat_score.json only.
+   Nothing below this comment block needs to change for that.
+
+   JSON → CONFIG field mapping:
+     score              -> CONFIG.score
+     objective_score    -> CONFIG.objective
+     subjective_score   -> CONFIG.subjective
+     confidence         -> CONFIG.confidence
+     risk_level         -> CONFIG.riskLabel   (blank = auto-derive from score)
+     sparkline          -> CONFIG.sparkline
+     gauge              -> CONFIG.gauge       (updates the 6 legend range labels)
+
+   Note: objective_max / subjective_max (the "/37" and "/63") and
+   summary / summary_cards (wallets, domain_age, indicators — no
+   matching UI element in the current design) are not in the JSON
+   schema and are intentionally left as-is / unused, so the frozen
+   layout never changes shape from a data refresh.
+   ============================================================ */
+async function loadThreatScoreData(){
+  try{
+    const res = await fetch('/reports/threat_score.json', {
+    cache: "no-store"
+    });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    if(typeof data.score === 'number') CONFIG.score = data.score;
+    if(typeof data.objective_score === 'number') CONFIG.objective = data.objective_score;
+    if(typeof data.subjective_score === 'number') CONFIG.subjective = data.subjective_score;
+    if(typeof data.confidence === 'number') CONFIG.confidence = data.confidence;
+    if(typeof data.risk_level === 'string') CONFIG.riskLabel = data.risk_level;
+    if(Array.isArray(data.sparkline) && data.sparkline.length >= 2) CONFIG.sparkline = data.sparkline;
+    if(data.gauge && typeof data.gauge === 'object') CONFIG.gauge = data.gauge;
+
+  }catch(err){
+    console.warn('[threat-score] Could not load threat_score.json, using default CONFIG instead:', err);
+  }finally{
+    renderDashboard();
+  }
+}
+
+window.addEventListener('load', loadThreatScoreData);
+
+// bright corner-accent brackets on every framed panel (side cards, legend, bottom cards)
+// (static, one-time — not part of the dynamic data, runs regardless of JSON load result)
+window.addEventListener('load', ()=>{
+  document.querySelectorAll('.framed').forEach(el=>{
+    ['tl','tr','bl','br'].forEach(pos=>{
+      const c = document.createElement('span');
+      c.className = 'corner-accent ' + pos;
+      el.appendChild(c);
+    });
+  });
+});
+</script>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</body>
+</html>

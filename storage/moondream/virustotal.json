@@ -1,0 +1,3 @@
+{
+    "answer": "[\n  {\n    \"site\": \"alphamountain.ai\",\n    \"label\": \"Phishing\"\n  },\n  {\n    \"site\": \"CyRadar\",\n    \"label\": \"Phishing\"\n  },\n  {\n    \"site\": \"Fortinet\",\n    \"label\": \"Phishing\"\n  },\n  {\n    \"site\": \"Lionic\",\n    \"label\": \"Phishing\"\n  },\n  {\n    \"site\": \"VIPRE\",\n    \"label\": \"Phishing\"\n  },\n  {\n    \"site\": \"Webroot\",\n    \"label\": \"Phishing\"\n  },\n  {\n    \"site\": \"Acronis\",\n    \"label\": \"Phishing\"\n  },\n  {\n    \"site\": \"Clean\",\n    \"label\": \"Phishing\"\n  }\n]"
+}

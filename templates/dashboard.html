@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard</title>
+
+<style>
+
+body{
+background:#05070d;
+font-family:Segoe UI;
+color:white;
+}
+
+.nav{
+height:70px;
+background:#0d1117;
+display:flex;
+align-items:center;
+padding-left:30px;
+border-bottom:1px solid cyan;
+}
+
+.dashboard{
+
+padding:30px;
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:20px;
+}
+
+.dashboard-image{
+
+    width:105%;
+
+    height:91%;
+
+    object-fit:stretch;
+
+    display:block;
+
+}
+
+.image-container{
+
+    width:100%;
+
+    height:calc(100% - 45px);
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+.card{
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
+border-radius:20px;
+
+padding:25px;
+
+border:1px solid rgba(0,255,255,.2);
+}
+
+.big{
+grid-column:span 2;
+height:400px;
+}
+
+.metric{
+font-size:50px;
+color:cyan;
+}
+
+.nav-arrow{
+position:fixed;
+top:50%;
+transform:translateY(-50%);
+z-index:50;
+width:56px;
+height:56px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(2,9,8,.7);
+border:1px solid rgba(0,255,255,.5);
+border-radius:50%;
+color:cyan;
+text-decoration:none;
+filter:drop-shadow(0 0 6px rgba(0,255,255,.6));
+transition:.25s;
+}
+.nav-arrow:hover{
+background:rgba(0,255,255,.12);
+filter:drop-shadow(0 0 14px rgba(0,255,255,.9));
+transform:translateY(-50%) scale(1.08);
+}
+.nav-arrow svg{
+width:26px;
+height:26px;
+}
+.nav-arrow.left{ left:18px; }
+.nav-arrow.right{ right:18px; }
+
+</style>
+
+</head>
+
+<body>
+
+<a href="/investigation" class="nav-arrow left" title="Previous">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</a>
+
+<a href="/threat_score" class="nav-arrow right" title="Next">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+</a>
+
+<div class="nav">
+PHISHGUARD COMMAND CENTER
+</div>
+
+<div class="dashboard">
+
+<div class="card">
+
+<h3>Threat Score</h3>
+
+<div class="metric" id="threat-score-value">
+92
+</div>
+
+<span id="threat-score-label">CRITICAL</span>
+
+</div>
+
+<div class="card">
+
+<h3>Wallets</h3>
+
+<div class="metric" id="wallets-value">
+4
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>External_Domains</h3>
+
+<div class="metric" id="external-domains-value">
+2
+</div>
+
+
+</div>
+
+<div class="card">
+
+<h3>Indicators</h3>
+
+<div class="metric" id="indicators-value">
+17
+</div>
+
+</div>
+
+<div class="card big">
+
+Virustotal
+
+<img
+        src="/reports/images/virustotal_top.png"
+        class="dashboard-image"
+        alt="VirusTotal">
+
+</div>
+
+<div class="card big">
+
+IPQS
+
+<img
+        src="/reports/images/ipqs_top.png"
+        class="dashboard-image"
+        alt="IPQS">
+
+</div>
+
+</div>
+
+<script>
+
+function threatLabel(score) {
+  if (score <= 0) return "SEVERE";
+  if (score <= 20) return "CRITICAL";
+  if (score <= 70) return "HIGH";
+  if (score <= 40) return "MEDIUM";
+  return "LOW";
+}
+
+function renderCommandCenter(data) {
+  document.getElementById("threat-score-value").textContent = data.threat_score;
+  document.getElementById("threat-score-label").textContent = threatLabel(data.threat_score);
+  document.getElementById("wallets-value").textContent = data.wallets;
+  document.getElementById("external-domains-value").textContent = data.external_domains;
+  document.getElementById("indicators-value").textContent = data.indicators;
+}
+
+fetch("/reports/command_center.json", { cache: "no-store" })
+  .then(response => {
+    if (!response.ok) throw new Error("Failed to load command_center.json");
+    return response.json();
+  })
+  .then(renderCommandCenter)
+  .catch(err => console.error(err));
+
+</script>
+
+</body>
+</html>
