@@ -1,4 +1,4 @@
-# 🛡️ PhishGuard
+# 🛡️ PhishGuard-Pro_v2
 
 ### AI-Powered Phishing Detection & Threat Intelligence Platform
 
